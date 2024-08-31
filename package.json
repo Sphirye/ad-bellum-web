@@ -8,7 +8,6 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@mdi/font": "7.4.47",
     "core-js": "^3.37.1",
     "roboto-fontface": "*",
     "vue": "^3.4.31",
@@ -16,6 +15,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.24.7",
+    "@mdi/font": "^7.4.47",
     "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-typescript": "^13.0.0",
