@@ -75,14 +75,6 @@
         </template>
       </v-time-picker>
     </v-card-text>
-
-    <v-card-actions>
-      <v-spacer/>
-
-      <v-btn variant="tonal" border="white md">
-        Marcar punto
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
