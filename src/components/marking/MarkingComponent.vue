@@ -75,10 +75,30 @@
         </template>
       </v-time-picker>
     </v-card-text>
+
+    <v-card-actions>
+      <v-spacer/>
+      <v-btn variant="outlined" @click="toggleDialog()">
+        Punto
+      </v-btn>
+    </v-card-actions>
+
+    <v-dialog
+      v-model="dialog"
+      width="auto"
+    >
+      <ScoreMarkingDialog/>
+    </v-dialog>
+
   </v-card>
 </template>
 
 <script lang="ts" setup>
+  const dialog = ref<boolean>(false);
+  
+  const toggleDialog = () => {
+    dialog.value = !dialog.value;
+  };
 </script>
 
 <style>
