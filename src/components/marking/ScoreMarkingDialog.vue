@@ -34,7 +34,8 @@
                     <div class="d-flex flex-column">
                       <span class="text-h6 font-weight-bold">Rojo</span>
                       <span class="text-subtitle-2 text-medium-emphasis">Carlos</span>
-                    </div>    
+                    </div>
+                    <v-checkbox hide-details/>
                   </div>
                 </template>
                 <v-divider color="white" thickness="2" class="mx-1"/>
@@ -60,6 +61,7 @@
                     <span class="text-h6 font-weight-bold">Negro</span>
                     <span class="text-subtitle-2 text-medium-emphasis">Juan</span>
                   </div>  
+                  <v-checkbox hide-details/>
                 </div>
               </template>
               <v-divider color="white" thickness="2" class="mx-1"/>
@@ -141,6 +143,12 @@
         </v-col>
       </v-row>
 		</v-card-text>
+
+    <v-card-actions>
+      <v-btn variant="outlined">
+        Marcar
+      </v-btn>
+    </v-card-actions>
 
   </v-card>
 </template>
