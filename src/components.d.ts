@@ -12,5 +12,6 @@ declare module 'vue' {
     MarkingComponent: typeof import('./components/marking/MarkingComponent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScoreMarkingDialog: typeof import('./components/marking/ScoreMarkingDialog.vue')['default']
   }
 }
