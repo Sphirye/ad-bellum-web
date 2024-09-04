@@ -2,7 +2,6 @@
   <v-card
 		border="white md"
 		class="mx-auto border-md"
-    width="400"
     color="#242424"
   >
     <template v-slot:title>
