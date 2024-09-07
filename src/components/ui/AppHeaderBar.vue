@@ -1,9 +1,8 @@
 <template>
-  <v-app-bar>
+  <v-app-bar class="border-b" elevation="0" temporary>
     <template v-slot:prepend>
-       <v-app-bar-nav-icon/>
+       <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
     </template>
-
     <v-app-bar-title class="ml-3">
       <div class="custom-borderline pointer">
         <div
@@ -22,6 +21,10 @@
     </v-app-bar-title>
   </v-app-bar>
 </template>
+
+<script lang="ts" setup>
+  const drawer = defineModel({required: true, type: Boolean})
+</script>
 
 <style>
 @font-face {
