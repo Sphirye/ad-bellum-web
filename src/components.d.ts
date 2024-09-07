@@ -16,5 +16,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ScoreMarkingDialog: typeof import('./components/marking/ScoreMarkingDialog.vue')['default']
+    SparringHistory: typeof import('./components/SparringHistory.vue')['default']
+    SparringHistoryTable: typeof import('./components/SparringHistoryTable.vue')['default']
   }
 }
