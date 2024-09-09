@@ -7,8 +7,8 @@
       />
 
       <v-list-item
-        title="Historial de Sparring"
-        @click="$router.push('/sparring-history')"
+        title="Combates"
+        @click="$router.push('/fights')"
       />
     </v-list>
   </v-navigation-drawer>
