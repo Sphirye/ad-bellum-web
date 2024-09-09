@@ -5,7 +5,7 @@ export enum ExchangeType {
   NO_QUALITY = "NO_QUALITY"
 }
 
-export default class Score {
+export default class MatchScore {
   time?: string = undefined
   region?: string = undefined
   warnings?: [string] = undefined

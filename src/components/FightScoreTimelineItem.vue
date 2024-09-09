@@ -25,11 +25,11 @@
 </template>
 
 <script lang="ts" setup>
-import Score from '@/models/Score';
+import MatchScore from '@/models/Score';
 import { PropType } from 'vue';
   const props = defineProps({
     score: {
-      type: Object as PropType<Score>,
+      type: Object as PropType<MatchScore>,
       required: true
     }
   })

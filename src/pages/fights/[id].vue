@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts" setup>
-import Score, { ExchangeType } from '@/models/Score';
+import MatchScore, { ExchangeType } from '@/models/MatchScore';
 
 
-let scores: Score[] = [
+let scores: MatchScore[] = [
   {
     time: "00:14",
     attackType: "Estocada",  
