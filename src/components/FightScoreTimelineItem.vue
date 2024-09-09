@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import MatchScore from '@/models/MatchScore';
 import { PropType } from 'vue';
-  const props = defineProps({
+  defineProps({
     score: {
       type: Object as PropType<MatchScore>,
       required: true
