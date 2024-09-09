@@ -1,15 +1,23 @@
 <template>
   <v-container fluid>
-    <v-card
-      title="Detalles del combate"
-      flat
-    >
-      <template v-slot:text>
-        <v-timeline side="end">
-          <FightScoreTimelineItem v-for="score in scores" :score="score"/>
-        </v-timeline>
-      </template>
-    </v-card>
+    <v-row>
+      <v-col cols="12" sm="6">
+        <MatchOverview/>
+      </v-col>
+
+      <v-col cols="12" sm="6">
+        <v-card
+          title="Detalles del combate"
+          flat
+        >
+          <template v-slot:text>
+            <v-timeline side="end">
+              <FightScoreTimelineItem v-for="score in scores" :score="score"/>
+            </v-timeline>
+          </template>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

@@ -15,6 +15,7 @@ declare module 'vue' {
     FightTimelineScore: typeof import('./components/FightTimelineScore.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     MarkingComponent: typeof import('./components/marking/MarkingComponent.vue')['default']
+    MatchOverview: typeof import('./components/match/MatchOverview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ScoreMarkingDialog: typeof import('./components/marking/ScoreMarkingDialog.vue')['default']
