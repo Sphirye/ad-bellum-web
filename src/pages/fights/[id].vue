@@ -1,17 +1,17 @@
 <template>
   <v-container fluid>
-    <v-row>
-      <v-col cols="12" sm="6">
+    <v-row dense>
+      <v-col cols="12" sm="7" md="8">
         <MatchOverview/>
       </v-col>
 
-      <v-col cols="12" sm="6">
+      <v-col cols="12" sm="5" md="4">
         <v-card
           title="Detalles del combate"
           flat
         >
           <template v-slot:text>
-            <v-timeline side="end">
+            <v-timeline width="300px" side="end" class="mr-auto">
               <FightScoreTimelineItem v-for="score in scores" :score="score"/>
             </v-timeline>
           </template>

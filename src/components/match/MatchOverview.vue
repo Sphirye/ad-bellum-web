@@ -4,7 +4,7 @@
     <v-card-title>Resumen</v-card-title>
 
     <v-card-text>
-      <v-row align="center">
+      <v-row align="center" dense>
 
         <v-col cols="6">
           <v-card
