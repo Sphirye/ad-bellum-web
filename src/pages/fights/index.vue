@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
       <v-card
-        title="Historial de Sparrings"
+        title="Historial de Combates"
         flat
       >
         <template v-slot:text>
@@ -14,7 +14,7 @@
         />
         </template>
   
-        <SparringHistoryTable/>
+        <MatchesHistoryTable/>
   
       </v-card>
     </v-container>
