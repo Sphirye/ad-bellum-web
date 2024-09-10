@@ -11,6 +11,7 @@ declare module 'vue' {
     AppHeadBar: typeof import('./components/ui/AppHeadBar.vue')['default']
     AppHeaderBar: typeof import('./components/ui/AppHeaderBar.vue')['default']
     AppNavigationDrawer: typeof import('./components/ui/AppNavigationDrawer.vue')['default']
+    Card: typeof import('./components/ui/Card.vue')['default']
     FightScoreTimelineItem: typeof import('./components/FightScoreTimelineItem.vue')['default']
     FightTimelineScore: typeof import('./components/FightTimelineScore.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']

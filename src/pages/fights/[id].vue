@@ -6,16 +6,17 @@
       </v-col>
 
       <v-col cols="12" sm="5" md="4">
-        <v-card
-          title="Detalles del combate"
-          flat
-        >
+        <Card>
+          <template v-slot:title>
+            Detalles del combate
+          </template>
+
           <template v-slot:text>
             <v-timeline width="300px" side="end" class="mr-auto">
               <FightScoreTimelineItem v-for="score in scores" :score="score"/>
             </v-timeline>
           </template>
-        </v-card>
+        </Card>
       </v-col>
     </v-row>
   </v-container>

@@ -1,9 +1,13 @@
 <template>
-  <v-card flat>
+  <Card>
+    <template v-slot:title>
+      <v-btn variant="text" icon @click="$router.back()" class="mr-2">
+        <v-icon icon="mdi-arrow-left"/>
+      </v-btn>
+      Vista General
+    </template>
 
-    <v-card-title>Resumen</v-card-title>
-
-    <v-card-text>
+    <template v-slot:text>
       <v-row align="center" dense>
 
         <v-col cols="6">
@@ -67,8 +71,6 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-card-text>
-
-    
-  </v-card>
+    </template>
+  </Card>
 </template>
