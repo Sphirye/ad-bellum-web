@@ -11,66 +11,55 @@
       <v-row align="center" dense>
 
         <v-col cols="6">
-          <v-card
+          <MatchFencerOverview
+            :match="match"          
+            :fencer="1"
             color="rgba(189,69,69,255)"
-          >
-            <template v-slot:title>
-              <div class="d-flex justify-space-between">
-                <div class="d-flex">
-                  <div class="d-flex flex-column">
-                    <span class="text-h6 font-weight-bold">Rojo</span>
-                    <span class="text-subtitle-2 text-medium-emphasis">Juan Rafael</span>
-                  </div>
-                </div>
-
-                7 pts
-              </div>
-            </template>
-
-            <v-card-item>
-              <template v-slot:subtitle>
-                <v-icon
-                  class="me-1 pb-1"
-                  icon="mdi-alert"
-                  size="18"
-                />
-        
-                Penalizaciones: 5
-              </template>
-            </v-card-item>
-          </v-card>
+          />
         </v-col>
 
         <v-col cols="6">
-          <v-card
+          <MatchFencerOverview
+            :match="match"          
+            :fencer="2"
             color="#494949"
-          >
-            <template v-slot:title>
-              <div class="d-flex justify-space-between">
-                <div class="d-flex">
-                  <div class="d-flex flex-column">
-                    <span class="text-h6 font-weight-bold">Negro</span>
-                    <span class="text-subtitle-2 text-medium-emphasis">Carlos Antonio</span>
-                  </div>
-                </div>
+          />
+        </v-col>
 
-                4 pts
-              </div>
-            </template>
-
-            <v-card-item>
-              <template v-slot:subtitle>
-                <v-icon
-                  class="me-1 pb-1"
-                  icon="mdi-alert"
-                  size="18"
-                />
-                Penalizaciones: 1
-              </template>
-            </v-card-item>
+        <v-col cols="12">
+          <v-card variant="flat" border="opacity-25 sm" max-width="500px">
+            <v-card-text>
+              <v-card-item class="d-flex py-0">
+                <v-icon icon="mdi-clock" class="pb-2"/>
+                <span class="text-h5 mx-2">Duración:</span>
+                <span class="text-h5">03:35</span>
+              </v-card-item>
+    
+              <v-card-item class="d-flex py-0">
+                <v-icon icon="mdi-close" class="pb-2"/>
+                <span class="text-h5 mx-2">Dobles:</span>
+                <span class="text-h5">2</span>
+              </v-card-item>
+    
+              <v-card-item class="d-flex py-0">
+                <v-icon icon="mdi-alert" class="pb-2"/>
+                <span class="text-h5 mx-2">Penalizaciones:</span>
+                <span class="text-h5">2</span>
+              </v-card-item>
+            </v-card-text>
           </v-card>
         </v-col>
+
       </v-row>
     </template>
   </Card>
 </template>
+
+<script lang="ts" setup>
+import Match from '@/models/Match';
+
+  const match: Match = {
+    fencer_1: "Juan Jesus",
+    fencer_2: "Antonio Manuel"
+  }
+</script>
