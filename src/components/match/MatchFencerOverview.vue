@@ -35,12 +35,6 @@
         Rebanadas: 1
       </v-card-subtitle>
     </v-card-item>
-
-    <v-card-item class="my-0 py-0">
-      <template v-slot:subtitle>
-        Estocadas: 1
-      </template>
-    </v-card-item>
   </v-card>
 </template>
 
