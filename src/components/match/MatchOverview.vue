@@ -1,14 +1,13 @@
 <template>
   <Card>
     <template v-slot:title>
-      <v-btn variant="text" icon @click="$router.back()" class="mr-2">
+      <v-btn variant="text" icon @click="$router.back()" class="mr-2" density="compact">
         <v-icon icon="mdi-arrow-left"/>
       </v-btn>
       Vista General
     </template>
-
     <template v-slot:text>
-      <v-row align="center" dense>
+      <v-row align="center" dense justify="center">
 
         <v-col cols="6">
           <MatchFencerOverview
