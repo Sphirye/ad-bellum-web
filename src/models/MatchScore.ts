@@ -1,10 +1,16 @@
-import { JsonConverter, JsonCustomConvert, JsonProperty } from "json2typescript"
+import { JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json2typescript"
 
 export enum Verdict {
   DOUBLE = "DOUBLE",
   POINT = "POINT",
   NO_EXCHANGE = "NO_EXCHANGE",
   NO_QUALITY = "NO_QUALITY"
+}
+
+export enum PointType {
+  CUT = "CUT",
+  THRUST = "THRUST",
+  SLICE = "SLICE",
 }
 
 @JsonConverter
@@ -17,6 +23,17 @@ class VerdictConverter implements JsonCustomConvert<Verdict> {
     }
 }
 
+@JsonConverter
+class PointTypeConverter implements JsonCustomConvert<PointType> {
+    deserialize(data: string): PointType {
+        return (<any>PointType)[data]
+    }
+    serialize(data: PointType): any {
+        return data.toString()
+    }
+}
+
+@JsonObject("MatchScore")
 export default class MatchScore {
   @JsonProperty("id", Number)
   id?: number = undefined
@@ -28,8 +45,8 @@ export default class MatchScore {
 
   warnings?: [string] = undefined
 
-  @JsonProperty("timestamp", String)
-  pointType?: string = undefined
+  @JsonProperty("type", PointTypeConverter)
+  pointType?: PointType = undefined
 
   @JsonProperty("verdict", VerdictConverter)
   verdict?: Verdict = undefined
