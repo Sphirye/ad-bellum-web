@@ -1,5 +1,9 @@
 <template>
-  <v-card variant="flat" border="opacity-25 md">
+  <v-card
+    variant="flat"
+    border="opacity-25 md"
+    :loading="loading"
+  >
       <v-card-title>
         <v-sheet color="grey-darken-1" class="py-3 px-3 my-2">
           <v-row no-gutters align="center">
@@ -13,5 +17,21 @@
       <v-card-text>
         <slot name="text"/>
       </v-card-text>
+
+      <v-divider
+        opacity="25"
+        class="mx-3"
+        v-if="$slots.actions"
+      />
+
+      <v-card-actions v-if="$slots.actions">
+        <slot name="actions"/>
+      </v-card-actions>
   </v-card>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  loading: { type: Boolean, required: false }
+})
+</script>
