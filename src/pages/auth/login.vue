@@ -55,10 +55,13 @@ import Handler from '@/handlers/Handler';
 import { SingleItem } from '@/handlers/interfaces/ContentUI';
 import LoginResponse from '@/models/responses/LoginResponse';
 import AuthService from '@/services/AuthService';
+import { useAppStore } from '@/stores/app';
 
-export default {
+export default defineComponent({
   data() {
     return {
+      router: useRouter(),
+      store: useAppStore(),
       loading: false,
       email: "",
       password: "",
@@ -73,7 +76,14 @@ export default {
         AuthService.login(this, this.email, this.password)
       )
 
+      if (token.item.token) {
+        this.store.setToken(token.item.token)
+        this.router.push("/")
+        
+      } else {
+        // TODO: failed login message
+      }
     }
   }
-}
+})
 </script>
