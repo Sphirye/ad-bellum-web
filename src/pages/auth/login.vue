@@ -78,8 +78,8 @@ export default defineComponent({
 
       if (token.item.token) {
         this.store.setToken('Bearer ' + token.item.token)
+        this.store.saveSession()
         this.router.push("/")
-        
       } else {
         // TODO: failed login message
       }
