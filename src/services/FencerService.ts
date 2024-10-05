@@ -22,11 +22,10 @@ export default class FencerService {
 
     static async postFencer(component: ComponentPublicInstance, payload: Fencer) {
         try {
-            const response = await component.axios.post(ConstantTool.BASE_URL + '/fencer', {
+            const response = await component.axios.post(ConstantTool.BASE_URL + '/fencer', payload, {
                 headers: {
                     Authorization: useAppStore().token?.toString()
                 },
-                payload
             })
             const fencer = JsonTool.jsonConvert.deserializeObject(response.data, Fencer)
             return Promise.resolve({ result: fencer })
