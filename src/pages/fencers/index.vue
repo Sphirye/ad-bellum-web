@@ -2,14 +2,18 @@
   <v-container fluid>
     <Card>
       <template v-slot:title>
-        <v-btn variant="text" icon @click="$router.back()" class="mr-2" density="compact">
+        <v-btn variant="text" icon @click="router.back()" class="mr-2" density="compact">
           <v-icon icon="mdi-arrow-left"/>
         </v-btn>
         Esgrimistas
 
         <v-spacer/>
 
-        <v-btn color="primary" variant="flat">
+        <v-btn
+          color="primary"
+          variant="flat"
+          @click="dialog = true"
+        >
           Añadir
         </v-btn>
       </template>
@@ -21,6 +25,17 @@
         />
       </template>
     </Card>
+
+    <v-dialog
+      v-model="dialog"
+      min-width="300px"
+      max-width="500px"
+    >
+      <CreateFencerDialog
+        v-if="dialog"
+        @closeDialog="dialog = false"
+      />
+    </v-dialog>
   </v-container>
 </template>
 
@@ -40,7 +55,8 @@ export default defineComponent({
         { title: 'Creado por', align: 'center', value: 'createdBy' },
       ] as any,
       fencers: { items: [], totalItems: 0 } as MultipleItem<Fencer>,
-      loading: false
+      loading: false,
+      dialog: false
     }
   },
 
