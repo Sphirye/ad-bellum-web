@@ -10,7 +10,7 @@ export default class FencerService {
         try {
             const response = await component.axios.get(ConstantTool.BASE_URL + '/fencer', {
                 headers: {
-                    Authorization: useAppStore().token?.toString()
+                    Authorization: useAppStore().session.token
                 }
             })
             const fencers = JsonTool.jsonConvert.deserializeArray(response.data, Fencer)
@@ -24,7 +24,7 @@ export default class FencerService {
         try {
             const response = await component.axios.post(ConstantTool.BASE_URL + '/fencer', payload, {
                 headers: {
-                    Authorization: useAppStore().token?.toString()
+                    Authorization: useAppStore().session.token
                 },
             })
             const fencer = JsonTool.jsonConvert.deserializeObject(response.data, Fencer)
