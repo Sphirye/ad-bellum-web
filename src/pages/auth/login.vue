@@ -77,7 +77,7 @@ export default defineComponent({
       )
 
       if (token.item.token) {
-        this.store.setToken(token.item.token)
+        this.store.setToken('Bearer ' + token.item.token)
         this.router.push("/")
         
       } else {
