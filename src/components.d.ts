@@ -12,6 +12,7 @@ declare module 'vue' {
     AppHeaderBar: typeof import('./components/ui/AppHeaderBar.vue')['default']
     AppNavigationDrawer: typeof import('./components/ui/AppNavigationDrawer.vue')['default']
     Card: typeof import('./components/ui/Card.vue')['default']
+    CreateFencerDialog: typeof import('./components/dialogs/CreateFencerDialog.vue')['default']
     FightScoreTimelineItem: typeof import('./components/FightScoreTimelineItem.vue')['default']
     FightTimelineScore: typeof import('./components/FightTimelineScore.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
