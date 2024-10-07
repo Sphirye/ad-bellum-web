@@ -13,6 +13,10 @@
 
       <v-col cols="6">
         <v-select
+          v-model="match.fencer_1_id"
+          :items="fencers.items"
+          item-title="name"
+          item-value="id"
           rounded="0"
           label="Esgrimista 1"
           variant="outlined"
@@ -24,6 +28,10 @@
 
       <v-col cols="6">
         <v-select
+          v-model="match.fencer_2_id"
+          :items="fencers.items"
+          item-title="name"
+          item-value="id"
           rounded="0"
           label="Esgrimista 2"
           variant="outlined"
@@ -106,7 +114,7 @@
       <v-btn
         color="primary"
         variant="flat"
-        @click="router.push('/fights/create')"
+        @click="createMatch()"
       >
         Crear
       </v-btn>
@@ -115,10 +123,23 @@
 </template>
 
 <script lang="ts">
+import Handler from '@/handlers/Handler';
+import { MultipleItem } from '@/handlers/interfaces/ContentUI';
+import Fencer from '@/models/Fencer';
+import Match from '@/models/Match';
+import FencerService from '@/services/FencerService';
+import MatchService from '@/services/MatchService';
+
 export default defineComponent({
   data() {
     return {
       router: useRouter(),
+      loading: false,
+
+      match: new Match(),
+
+      fencers: { items: [], totalItems: 0 } as MultipleItem<Fencer>,
+
       seasons: {
         0: '1 min',
         1: '2 min',
@@ -126,6 +147,25 @@ export default defineComponent({
         3: '4 min',
         4: '5 min',
       }
+    }
+  },
+
+  created() {
+    this.getFencers()
+  },
+
+  methods: {
+    async getFencers() {
+      await Handler.getItems(this, this.fencers, () =>
+        FencerService.getFencers(this)
+      )
+    },
+
+    async createMatch() {
+      let response = { item: undefined }
+      await Handler.getItem(this, response, () =>
+        MatchService.postMatch(this, this.match)
+      )
     }
   }
 })
