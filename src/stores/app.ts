@@ -1,5 +1,5 @@
 // Utilities
-import { Session } from '@/models/Session'
+import Session from '@/models/Session'
 import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', {
@@ -10,8 +10,10 @@ export const useAppStore = defineStore('app', {
   },
 
   actions: {
-    setToken(token: string) {
-      this.session.token = token
+    setSession(session: Session) {
+      localStorage.removeItem(Session.KEY)
+      this.session = session
+      this.saveSession()
     },
 
     saveSession() {
