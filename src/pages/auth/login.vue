@@ -53,7 +53,7 @@
 <script lang="ts">
 import Handler from '@/handlers/Handler';
 import { SingleItem } from '@/handlers/interfaces/ContentUI';
-import LoginResponse from '@/models/responses/LoginResponse';
+import Session from '@/models/Session';
 import AuthService from '@/services/AuthService';
 import { useAppStore } from '@/stores/app';
 
@@ -70,14 +70,14 @@ export default defineComponent({
 
   methods: {
     async authenticate() {
-      let token: SingleItem<LoginResponse> = { item: {} }
+      let session: SingleItem<Session> = { item: {} }
 
-      await Handler.getItem(this, token, () =>
+      await Handler.getItem(this, session, () =>
         AuthService.login(this, this.email, this.password)
       )
 
-      if (token.item.token) {
-        this.store.setToken('Bearer ' + token.item.token)
+      if (session.item.token) {
+        this.store.setSession(session.item)
         this.store.saveSession()
         this.router.push("/")
       } else {
