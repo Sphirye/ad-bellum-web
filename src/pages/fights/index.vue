@@ -26,7 +26,11 @@
               single-line
             />
 
-            <MatchesHistoryTable/>
+            <v-data-table-virtual
+              :items="matches.items"
+              :headers="headers"
+              hover
+            />
           </template>
         </Card> 
       </v-col>
@@ -35,10 +39,37 @@
 </template>
 
 <script lang="ts">
+import Handler from '@/handlers/Handler';
+import { MultipleItem } from '@/handlers/interfaces/ContentUI';
+import Match from '@/models/Match';
+import MatchService from '@/services/MatchService';
+
   export default defineComponent({
     data() {
       return {
+        loading: false,
         router: useRouter(),
+
+        matches: { items: [], totalItems: 0 } as MultipleItem<Match>,
+
+        headers: [
+          { title: 'Esgrimistas', align: 'center', value: 'fencer_1.name' },
+          { title: 'Duración', align: 'center', value: 'duration' },
+          { title: 'Fecha', align: 'center', value: 'date' },
+          { title: 'Dobles', align: 'center', value: 'doubles' },
+        ] as any
+      }
+    },
+
+    created() {
+      this.getMatches()
+    },
+
+    methods: {
+      async getMatches() {
+        await Handler.getItems(this, this.matches, () =>
+          MatchService.getMatches(this)
+        )
       }
     }
   })
