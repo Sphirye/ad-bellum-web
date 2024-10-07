@@ -25,11 +25,17 @@ export default class Match {
 
     totalTime?: string = undefined
 
-    @JsonProperty("fencer_1", Fencer)
-    fencer_1?: string = undefined
+    @JsonProperty("fencer_1", Fencer, true)
+    fencer_1?: Fencer = undefined
 
-    @JsonProperty("fencer_2", Fencer)
-    fencer_2?: string = undefined
+    @JsonProperty("fencer_2", Fencer, true)
+    fencer_2?: Fencer = undefined
+
+    @JsonProperty("fencer_1_id", Number, true)
+    fencer_1_id?: number = undefined
+
+    @JsonProperty("fencer_2_id", Number, true)
+    fencer_2_id?: number = undefined
 
     matchScores?: MatchScore[] = undefined
 
