@@ -3,10 +3,12 @@
     <v-row dense justify="center" align="center">
 
       <v-col cols="12">
-        <v-btn variant="text" icon @click="router.back()" class="mr-2" density="compact">
-          <v-icon icon="mdi-arrow-left"/>
-        </v-btn>
-        Crear combate
+        <v-sheet color="grey-darken-1" class="py-3 px-3 my-2">
+          <v-btn variant="text" icon @click="router.back()" class="mr-2" density="compact">
+            <v-icon icon="mdi-arrow-left"/>
+          </v-btn>
+          Crear combate
+        </v-sheet>
       </v-col>
 
       <v-col cols="6">
@@ -90,6 +92,24 @@
           type="input"
         />
       </v-col>
+    </v-row>
+
+    <v-divider
+      opacity="25"
+      class="my-3"
+    />
+
+    <v-row dense>
+
+      <v-spacer/>
+
+      <v-btn
+        color="primary"
+        variant="flat"
+        @click="router.push('/fights/create')"
+      >
+        Crear
+      </v-btn>
     </v-row>
   </v-container>
 </template>
