@@ -3,7 +3,7 @@
     border="white md"
     class="mx-auto border-md"
     color="surface-variant"
-    max-width="344"
+    max-width="450"
     variant="tonal"
   >
     <v-card-title class="text-white">Overview</v-card-title>
@@ -94,6 +94,12 @@
 </template>
 
 <script lang="ts" setup>
+import Match from '@/models/Match';
+
+defineProps({
+  match: { type: Match, required: true },
+})
+
   const dialog = ref<boolean>(false);
   
   const toggleDialog = () => {
