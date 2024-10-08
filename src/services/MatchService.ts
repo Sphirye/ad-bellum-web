@@ -6,6 +6,20 @@ import Response from "@/models/responses/Response";
 
 export default class MatchService {
 
+    static async getMatch(component: ComponentPublicInstance, id: number) {
+        try {
+            const response = await component.axios.get(ConstantTool.BASE_URL + '/match/' + id, {
+                headers: {
+                    Authorization: useAppStore().session.token,
+                }
+            })
+            const match = JsonTool.jsonConvert.deserializeObject(response.data, Match)
+            return Promise.resolve({ result: match })
+        } catch(e) {
+            return Promise.reject(e)
+        }
+    }
+
     static async getMatches(component: ComponentPublicInstance): Promise<Response<Match[]>> {
         try {
             const response = await component.axios.get(ConstantTool.BASE_URL + '/match', {
