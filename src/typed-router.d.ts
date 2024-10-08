@@ -22,7 +22,7 @@ declare module 'vue-router/auto-routes' {
     '/auth/login': RouteRecordInfo<'/auth/login', '/auth/login', Record<never, never>, Record<never, never>>,
     '/fencers/': RouteRecordInfo<'/fencers/', '/fencers', Record<never, never>, Record<never, never>>,
     '/fights/': RouteRecordInfo<'/fights/', '/fights', Record<never, never>, Record<never, never>>,
-    '/fights/[id]': RouteRecordInfo<'/fights/[id]', '/fights/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/fights/[id]/': RouteRecordInfo<'/fights/[id]/', '/fights/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/fights/create': RouteRecordInfo<'/fights/create', '/fights/create', Record<never, never>, Record<never, never>>,
   }
 }
