@@ -84,11 +84,14 @@
         <v-col cols="12">
 
           <v-select
+            v-model="score.type"
+            :items="pointTypes"
+            item-title="name"
+            item-value="value"
             rounded="0"
             label="Tipo de punto"
             variant="outlined"
             density="comfortable"
-            :items="attackTypes"
             hide-details
             dense
             class="mb-2"
@@ -166,7 +169,7 @@ export default defineComponent({
   data() {
     return {
       score: new MatchScore(),
-      attackTypes: [
+      pointTypes: [
         { name: "Corte", value: PointType.CUT },
         { name: "Estocada", value: PointType.THRUST },
         { name: "Rebanada", value: PointType.SLICE },
