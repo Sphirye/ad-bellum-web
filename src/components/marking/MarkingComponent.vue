@@ -91,7 +91,10 @@
       v-model="dialog"
       width="auto"
     >
-      <ScoreMarkingDialog/>
+      <ScoreMarkingDialog
+        :match="match"
+        :scores="scores"
+      />
     </v-dialog>
 
   </v-card>
