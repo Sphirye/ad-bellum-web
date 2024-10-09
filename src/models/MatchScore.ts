@@ -38,16 +38,19 @@ export default class MatchScore {
   @JsonProperty("id", Number)
   id?: number = undefined
 
-  @JsonProperty("timestamp", String)
+  @JsonProperty("timestamp", String, true)
   timestamp?: string = undefined
 
   region?: string = undefined
 
   warnings?: [string] = undefined
 
-  @JsonProperty("type", PointTypeConverter)
-  pointType?: PointType = undefined
+  @JsonProperty("type", PointTypeConverter, true)
+  type?: PointType = undefined
 
-  @JsonProperty("verdict", VerdictConverter)
+  @JsonProperty("verdict", VerdictConverter, true)
   verdict?: Verdict = undefined
+
+  @JsonProperty("matchId", Number, true)
+  matchId?: number = undefined
 }
