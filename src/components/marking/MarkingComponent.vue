@@ -93,18 +93,25 @@
   </v-card>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import Match from '@/models/Match';
 
-defineProps({
-  match: { type: Match, required: true },
-})
 
-  const dialog = ref<boolean>(false);
-  
-  const toggleDialog = () => {
-    dialog.value = !dialog.value;
-  };
+export default defineComponent({
+  props: {
+    match: { type: Match, required: true },
+  },
+  data() {
+    return {
+      dialog: false,
+    }
+  },
+  methods: {
+    toggleDialog() {
+      this.dialog = !this.dialog;
+    }
+  }
+})  
 </script>
 
 <style>
