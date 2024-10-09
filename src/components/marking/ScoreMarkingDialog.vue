@@ -109,6 +109,9 @@
 
           <div class="my-2">
             <v-switch
+              v-model="score.afterblow"
+              :disabled="!isCleanScore()"
+              @change="onAfterblowChanged()"
               density="compact"
               color="primary"
               label="Afterblow"
@@ -117,6 +120,9 @@
             />
   
             <v-switch
+              v-model="score.control"
+              :disabled="!isCleanScore()"
+              @change="onControlChanged()"
               density="compact"
               color="primary"
               label="Control"
@@ -129,6 +135,9 @@
 
           <div class="d-flex justify-space-between wrap">
             <v-switch
+              v-model="score.verdict"
+              :value="verdict.DOUBLE"
+              :false-value="verdict.POINT"
               color="primary"
               label="Doble"
               hide-details
@@ -136,6 +145,9 @@
             />
   
             <v-switch
+              v-model="score.verdict"
+              :true-value="verdict.NO_EXCHANGE"
+              :false-value="verdict.POINT"
               color="primary"
               label="No exchange"
               hide-details
@@ -180,6 +192,7 @@ export default defineComponent({
         "Brazos",
       ],
       loading: false,
+      verdict: Verdict,
     }
   },
 
@@ -200,8 +213,24 @@ export default defineComponent({
       this.score = new MatchScore()
       this.score.matchId = this.match.id
       this.score.verdict = Verdict.POINT
+    },
+
+    isCleanScore() {
+      return this.score.verdict == Verdict.POINT;
+    },
+
+    onAfterblowChanged() {
+      if (this.score.afterblow) {
+        this.score.control = false
+      }
+    },
+
+    onControlChanged() {
+      if (this.score.control) {
+        this.score.afterblow = false
+      }
     }
-  }
+  },
 })
 </script>
 
