@@ -84,11 +84,14 @@
         <v-col cols="12">
 
           <v-select
+            v-model="score.type"
+            :items="pointTypes"
+            item-title="name"
+            item-value="value"
             rounded="0"
             label="Tipo de punto"
             variant="outlined"
             density="comfortable"
-            :items="attackTypes"
             hide-details
             dense
             class="mb-2"
@@ -144,7 +147,7 @@
 		</v-card-text>
 
     <v-card-actions>
-      <v-btn variant="outlined">
+      <v-btn variant="outlined" @click="postScore()">
         Marcar
       </v-btn>
     </v-card-actions>
@@ -153,24 +156,50 @@
 </template>
 
 <script lang="ts">
+import Handler from '@/handlers/Handler';
+import Match from '@/models/Match';
+import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
+import MatchScoreService from '@/services/MatchScoreService';
+
 export default defineComponent({
+  props: {
+    match: { type: Match, required: true },
+    scores: { type: Array as PropType<Array<MatchScore>>, required: true },
+  },
   data() {
     return {
-      attackTypes: [
-        "Corte",
-        "Estocada",
-        "Rebanada",
+      score: new MatchScore(),
+      pointTypes: [
+        { name: "Corte", value: PointType.CUT },
+        { name: "Estocada", value: PointType.THRUST },
+        { name: "Rebanada", value: PointType.SLICE },
       ],
       flanks: [
         "Cabeza/Superior",
         "Inferior",
         "Brazos",
-      ]
+      ],
+      loading: false,
     }
   },
+
+  created() {
+    this.resetScore()
+  },
+
   methods: {
-    postScore() {
-      // MatchScoreService
+    async postScore() {
+      let score = { item: new MatchScore() }
+
+      await Handler.getItem(this, score, () =>
+        MatchScoreService.postScore(this, this.score)
+      )
+    },
+
+    resetScore() {
+      this.score = new MatchScore()
+      this.score.matchId = this.match.id
+      this.score.verdict = Verdict.POINT
     }
   }
 })
