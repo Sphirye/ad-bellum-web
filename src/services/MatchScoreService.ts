@@ -22,9 +22,9 @@ export default class MatchScoreService {
         }
     }
 
-    async postScore(component: ComponentPublicInstance, score: MatchScore) {
+    static async postScore(component: ComponentPublicInstance, score: MatchScore) {
         try {
-            const response = await component.axios.get(ConstantTool.BASE_URL + '/match-score', {
+            const response = await component.axios.post(ConstantTool.BASE_URL + '/match-score', {
                     headers: { Authorization: useAppStore().session.token }
                 }
             )
