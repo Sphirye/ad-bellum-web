@@ -8,8 +8,10 @@
 
 <script lang="ts">
 import Handler from '@/handlers/Handler';
-import { SingleItem } from '@/handlers/interfaces/ContentUI';
+import { MultipleItem, SingleItem } from '@/handlers/interfaces/ContentUI';
 import Match from '@/models/Match';
+import MatchScore from '@/models/MatchScore';
+import MatchScoreService from '@/services/MatchScoreService';
 import MatchService from '@/services/MatchService';
 
 export default defineComponent({
@@ -17,12 +19,17 @@ export default defineComponent({
     return {
       route: useRoute(),
       match: { item: new Match() } as SingleItem<Match>,
+      scores: { items: [] } as MultipleItem<MatchScore>,
       loading: false,
     }
   },
 
-  created() {
-    this.getMatch()
+  async created() {
+    await this.getMatch()
+
+    if (this.match.item.id) {
+      await this.getMatchScores()
+    }
   },
 
   methods: {
@@ -33,6 +40,15 @@ export default defineComponent({
            MatchService.getMatch(this, id)
         );
       }
+    },
+
+    async getMatchScores() {
+      const example = new MatchScore()
+      example.matchId = this.match.item.id
+
+      await Handler.getItems(this, this.scores, () =>
+        MatchScoreService.getScores(this, example)
+      )
     }
   }
 })
