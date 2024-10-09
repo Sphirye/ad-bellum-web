@@ -152,18 +152,28 @@
   </v-card>
 </template>
 
-<script lang="ts" setup>
-  const attackTypes = [
-    "Corte",
-    "Estocada",
-    "Rebanada",
-  ]
-
-  const flanks = [
-    "Cabeza/Superior",
-    "Inferior",
-    "Brazos",
-  ]
+<script lang="ts">
+export default defineComponent({
+  data() {
+    return {
+      attackTypes: [
+        "Corte",
+        "Estocada",
+        "Rebanada",
+      ],
+      flanks: [
+        "Cabeza/Superior",
+        "Inferior",
+        "Brazos",
+      ]
+    }
+  },
+  methods: {
+    postScore() {
+      // MatchScoreService
+    }
+  }
+})
 </script>
 
 <style>

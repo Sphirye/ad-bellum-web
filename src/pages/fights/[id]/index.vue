@@ -23,29 +23,26 @@
 </template>
 
 <script lang="ts" setup>
-import MatchScore, { ExchangeType } from '@/models/MatchScore';
+import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
 
 
 let scores: MatchScore[] = [
   {
-    time: "00:14",
-    attackType: "Estocada",  
+    timestamp: "00:14",
     region: "Cabeza",
-    exchange: ExchangeType.POINT,
+    pointType: PointType.CUT,
   },
 
   {
-    time: "00:28",
-    attackType: "Estocada",  
+    timestamp: "00:28",
     region: "Cabeza",
-    exchange: ExchangeType.DOUBLE
+    pointType: PointType.CUT,
   },
 
   {
-    time: "00:52",
-    attackType: "Estocada",  
+    timestamp: "00:52",
     region: "Cabeza",
-    exchange: ExchangeType.POINT
+    pointType: PointType.CUT,
   }
 ]
 
