@@ -51,6 +51,12 @@ export default class MatchScore {
   @JsonProperty("verdict", VerdictConverter, true)
   verdict?: Verdict = undefined
 
+  @JsonProperty("afterblow", Boolean, true)
+  afterblow?: boolean = undefined
+
+  @JsonProperty("control", Boolean, true)
+  control?: boolean = undefined
+
   @JsonProperty("matchId", Number, true)
   matchId?: number = undefined
 }
