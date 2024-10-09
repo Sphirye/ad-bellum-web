@@ -1,7 +1,10 @@
 <template>
   <v-container fluid>
     <v-col cols="12">
-      <MarkingComponent :match="match.item"/>
+      <MarkingComponent
+        :match="match.item"
+        :scores="scores.items"
+      />
     </v-col>
   </v-container>
 </template>

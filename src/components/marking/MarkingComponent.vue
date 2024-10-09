@@ -17,7 +17,9 @@
             <v-card
               color="red-darken-4"
             >
-              <v-card-title>Rojo</v-card-title>
+              <v-card-title class="pb-0">Rojo</v-card-title>
+              <v-card-subtitle class="text-white">{{match.fencer_1?.name}}</v-card-subtitle>
+
 
               <v-divider color="white" thickness="2" class="mx-1"/>
 
@@ -43,7 +45,9 @@
             <v-card
               color="grey-darken-4"
             >
-              <v-card-title>Negro</v-card-title>
+              <v-card-title class="pb-0">Negro</v-card-title>
+              <v-card-subtitle class="text-white">{{match.fencer_2?.name}}</v-card-subtitle>
+
 
               <v-divider color="white" thickness="2" class="mx-1"/>
 
@@ -95,11 +99,13 @@
 
 <script lang="ts">
 import Match from '@/models/Match';
+import MatchScore from '@/models/MatchScore';
 
 
 export default defineComponent({
   props: {
     match: { type: Match, required: true },
+    scores: { type: Array as PropType<Array<MatchScore>>, required: true },
   },
   data() {
     return {
