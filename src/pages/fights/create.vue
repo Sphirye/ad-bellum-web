@@ -124,7 +124,7 @@
 
 <script lang="ts">
 import Handler from '@/handlers/Handler';
-import { MultipleItem } from '@/handlers/interfaces/ContentUI';
+import { MultipleItem, SingleItem } from '@/handlers/interfaces/ContentUI';
 import Fencer from '@/models/Fencer';
 import Match from '@/models/Match';
 import FencerService from '@/services/FencerService';
@@ -162,10 +162,15 @@ export default defineComponent({
     },
 
     async createMatch() {
-      let response = { item: undefined }
+      let response: SingleItem<Match> = { item: new Match() }
+
       await Handler.getItem(this, response, () =>
         MatchService.postMatch(this, this.match)
       )
+
+      if (response.item.id) {
+        this.router.push("/fights/" + response.item.id + "/manage")
+      }
     }
   }
 })
