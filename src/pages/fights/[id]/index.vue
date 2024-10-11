@@ -30,19 +30,16 @@ let scores: MatchScore[] = [
   {
     timestamp: "00:14",
     region: "Cabeza",
-    pointType: PointType.CUT,
   },
 
   {
     timestamp: "00:28",
     region: "Cabeza",
-    pointType: PointType.CUT,
   },
 
   {
     timestamp: "00:52",
     region: "Cabeza",
-    pointType: PointType.CUT,
   }
 ]
 
