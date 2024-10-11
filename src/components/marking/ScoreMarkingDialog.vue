@@ -23,46 +23,52 @@
 
         <v-item-group selected-class="border-primary" class="mb-4">
           <v-row dense>
-            <v-item v-slot="{ selectedClass, toggle }">
-              <v-col cols="6">
-                <v-card
-                  :class="[selectedClass]"
-                  color="rgba(189,69,69,255)"
-                  @click="toggle"
-                >
-                  <template v-slot:title>
-                    <div class="d-flex justify-space-between">
-                      <div class="d-flex flex-column">
-                        <span class="text-h6 font-weight-bold">Rojo</span>
-                        <span class="text-subtitle-2 text-medium-emphasis">Carlos</span>
-                      </div>
-                      <v-checkbox hide-details/>
+            <v-col cols="6">
+              <v-card
+                color="rgba(189,69,69,255)"
+              >
+                <template v-slot:title>
+                  <div class="d-flex justify-space-between">
+                    <div class="d-flex flex-column">
+                      <span class="text-h6 font-weight-bold">Rojo</span>
+                      <span class="text-subtitle-2 text-medium-emphasis">Carlos</span>
                     </div>
-                  </template>
-                  <v-divider color="white" thickness="2" class="mx-1"/>
-      
-                  <template v-slot:actions>
-                    <v-btn
-                      variant="outlined"
-                      append-icon="mdi-alert-outline"
-                      block
-                    >
-                      Penalizar
-                    </v-btn>
-                  </template>
-                </v-card>
-              </v-col>
-            </v-item>
+                    <v-checkbox
+                      v-model="score.scorerId"
+                      :value="match.fencer_1_id"
+                      return-object
+                      hide-details
+                    />
+                  </div>
+                </template>
+                <v-divider color="white" thickness="2" class="mx-1"/>
+    
+                <template v-slot:actions>
+                  <v-btn
+                    variant="outlined"
+                    append-icon="mdi-alert-outline"
+                    block
+                  >
+                    Penalizar
+                  </v-btn>
+                </template>
+              </v-card>
+            </v-col>
     
             <v-col cols="6">
-              <v-card color="#494949" @click="">
+              <v-card color="#494949">
                 <template v-slot:title>
                   <div class="d-flex justify-space-between">
                     <div class="d-flex flex-column">
                       <span class="text-h6 font-weight-bold">Negro</span>
                       <span class="text-subtitle-2 text-medium-emphasis">Juan</span>
                     </div>  
-                    <v-checkbox hide-details/>
+                    <v-checkbox
+                      v-model="score.scorerId"
+                      :value="match.fencer_2_id"
+                      return-object
+                      hide-details
+                    />
                   </div>
                 </template>
                 <v-divider color="white" thickness="2" class="mx-1"/>
@@ -241,7 +247,7 @@ export default defineComponent({
     },
 
     async _isFormValid() {
-        const { valid } = await this.$refs.form.validate()
+        const { valid } = await (this.$refs['form'] as any).validate()
         return valid as boolean
       },
   },
