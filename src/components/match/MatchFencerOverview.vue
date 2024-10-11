@@ -12,7 +12,7 @@
 
           <span
             class="text-subtitle-2 text-medium-emphasis d-inline-block text-truncate"
-            :style="`max-width: ${$vuetify.display.width > 420 ? '200px' : '70px'};`"
+            :style="`max-width: ${vuetify.display.width > 420 ? '200px' : '70px'};`"
           >
             {{ fencer == 1 ? match.fencer_1 : match.fencer_2 }}
           </span>
@@ -78,13 +78,21 @@
   </v-card>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import Match from '@/models/Match';
+import vuetify from '@/plugins/vuetify';
 import { PropType } from 'vue';
 
-defineProps({
-  match: { type: Object as PropType<Match>, required: true },
-  fencer: { type: Number, required: true },
-  color: { type: String, required: true }
+export default defineComponent({
+  props: {
+    match: { type: Object as PropType<Match>, required: true },
+    fencer: { type: Number, required: true },
+    color: { type: String, required: true }
+  },
+  data() {
+    return {
+      vuetify: vuetify
+    }
+  }
 })
 </script>
