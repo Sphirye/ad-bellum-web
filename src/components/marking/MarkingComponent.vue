@@ -89,11 +89,13 @@
 
     <v-dialog
       v-model="dialog"
+      persistent
       width="auto"
     >
       <ScoreMarkingDialog
         :match="match"
         :scores="scores"
+        @close="dialog = false"
       />
     </v-dialog>
 
