@@ -26,6 +26,7 @@
             <v-col cols="6">
               <v-card
                 color="rgba(189,69,69,255)"
+                :disabled="!isCleanScore()"
               >
                 <template v-slot:title>
                   <div class="d-flex justify-space-between">
@@ -36,6 +37,7 @@
                     <v-checkbox
                       v-model="score.scorerId"
                       :value="match.fencer_1_id"
+                      :rules="[isCleanScore() ? rules.required : true]"
                       return-object
                       hide-details
                     />
@@ -56,7 +58,10 @@
             </v-col>
     
             <v-col cols="6">
-              <v-card color="#494949">
+              <v-card
+                color="#494949"
+                :disabled="!isCleanScore()"
+              >
                 <template v-slot:title>
                   <div class="d-flex justify-space-between">
                     <div class="d-flex flex-column">
@@ -66,6 +71,7 @@
                     <v-checkbox
                       v-model="score.scorerId"
                       :value="match.fencer_2_id"
+                      :rules="[isCleanScore() ? rules.required : true]"
                       return-object
                       hide-details
                     />
