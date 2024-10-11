@@ -56,7 +56,6 @@
 
 <script lang="ts">
 import Match from '@/models/Match';
-import router from '@/router';
 
 export default defineComponent({
   data() {
