@@ -1,4 +1,4 @@
-import { JsonConvert, JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json2typescript"
+import { JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json2typescript"
 import MatchScore from "./MatchScore"
 import Fencer from "./Fencer"
 

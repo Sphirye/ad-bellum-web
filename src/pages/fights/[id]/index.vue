@@ -23,26 +23,23 @@
 </template>
 
 <script lang="ts" setup>
-import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
+import MatchScore from '@/models/MatchScore';
 
 
 let scores: MatchScore[] = [
   {
     timestamp: "00:14",
     region: "Cabeza",
-    pointType: PointType.CUT,
   },
 
   {
     timestamp: "00:28",
     region: "Cabeza",
-    pointType: PointType.CUT,
   },
 
   {
     timestamp: "00:52",
     region: "Cabeza",
-    pointType: PointType.CUT,
   }
 ]
 

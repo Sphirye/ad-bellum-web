@@ -1,14 +1,14 @@
 <template>
   <v-timeline-item dot-color="red-darken-3">
     <template v-slot:opposite>
-      <span>{{score.time}}</span>
+      <span>{{score.timestamp}}</span>
     </template>
     
     <v-card variant="flat" class="border-md">
       <template v-slot:text>
         <div class="d-flex">
           <div>
-            <strong>{{score.exchange}}</strong>
+            <strong>{{score.verdict}}</strong>
             
             <div class="text-caption">
               {{score.region}}

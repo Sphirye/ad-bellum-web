@@ -1,7 +1,7 @@
 <template>
   <Card>
     <template v-slot:title>
-      <v-btn variant="text" icon @click="$router.back()" class="mr-2" density="compact">
+      <v-btn variant="text" icon @click="router.back()" class="mr-2" density="compact">
         <v-icon icon="mdi-arrow-left"/>
       </v-btn>
       Vista General
@@ -54,11 +54,15 @@
   </Card>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import Match from '@/models/Match';
 
-  const match: Match = {
-    fencer_1: "Juan Jesus",
-    fencer_2: "Antonio Manuel"
+export default defineComponent({
+  data() {
+    return {
+      match: new Match(),
+      router: useRouter(),
+    }
   }
+})
 </script>
