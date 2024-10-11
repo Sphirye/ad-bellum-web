@@ -5,6 +5,7 @@
       border="white md"
       class="mx-auto border-md"
       color="#242424"
+      :loading="loading"
     >
       <template v-slot:title>
         <div class="d-flex align-center justify-space-between text-medium-emphasis">
@@ -176,7 +177,7 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn variant="outlined" @click="postScore()">
+        <v-btn variant="outlined" @click="postScore()" :loading="loading">
           Marcar
         </v-btn>
       </v-card-actions>
