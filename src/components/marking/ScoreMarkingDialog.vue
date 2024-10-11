@@ -10,6 +10,7 @@
         <div class="d-flex align-center justify-space-between text-medium-emphasis">
           Marcar Punto
           <v-btn
+            @click="$emit('close')"
             icon="mdi-close"
             variant="text"
             density="compact"
