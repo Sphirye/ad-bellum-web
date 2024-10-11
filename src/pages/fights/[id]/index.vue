@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
+import MatchScore from '@/models/MatchScore';
 
 
 let scores: MatchScore[] = [
