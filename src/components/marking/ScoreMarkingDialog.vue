@@ -227,6 +227,8 @@ export default defineComponent({
         await Handler.getItem(this, score, () =>
           MatchScoreService.postScore(this, this.score)
         )
+
+        this.$emit('close')
       }
       
     },
