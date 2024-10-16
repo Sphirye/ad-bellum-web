@@ -59,7 +59,7 @@ export default defineComponent({
       await Handler.getItem(this, fencer, () =>
         FencerService.postFencer(this, this.model)      
       )
-      this.$emit('close')
+      this.$emit('onFencerCreated')
     }
   }
 })
