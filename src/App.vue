@@ -6,9 +6,20 @@
   </v-app>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import { useAppStore } from './stores/app';
 
-const appStore = useAppStore()
-appStore.loadSession()
+export default defineComponent({
+  data() {
+    return {
+      appStore: useAppStore(),
+      router: useRouter(),
+    }
+  },
+  created() {
+    this.appStore.checkSession()
+  }
+})
+
+
 </script>
