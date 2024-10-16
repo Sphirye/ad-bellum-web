@@ -17,11 +17,7 @@ export default defineComponent({
     }
   },
   created() {
-    this.appStore.loadSession()
-
-    if (this.appStore.session.token == undefined) {
-      this.router.push("/auth/login")
-    }
+    this.appStore.checkSession()
   }
 })
 
