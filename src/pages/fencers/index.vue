@@ -33,7 +33,7 @@
     >
       <CreateFencerDialog
         v-if="dialog"
-        @closeDialog="dialog = false"
+        @close="dialog = false"
       />
     </v-dialog>
   </v-container>
