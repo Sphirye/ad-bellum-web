@@ -3,6 +3,8 @@ import ConstantTool from "./tools/ConstantTool";
 import JsonTool from "./tools/JsonTool";
 import Session from "@/models/Session";
 import Response from "@/models/responses/Response";
+import axios from "axios";
+import { useAppStore } from "@/stores/app";
 
 export default class LoginService {
     static async login(component: ComponentPublicInstance, email: string, password: string) {
@@ -19,9 +21,13 @@ export default class LoginService {
         }
     }
 
-    static async checkAuth(component: ComponentPublicInstance): Promise<Response<Session>> {
+    static async checkAuth(): Promise<Response<Session>> {
         try {
-            const response = await component.axios.get(ConstantTool.BASE_URL + "/auth/check")
+            const response = await axios.get(ConstantTool.BASE_URL + "/auth/check", {
+                headers: {
+                    Authorization: useAppStore().session.token,
+                },
+            })
             const session = JsonTool.jsonConvert.deserializeObject(response.data, Session)
 
             return Promise.resolve({result: session})
