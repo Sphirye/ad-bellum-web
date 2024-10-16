@@ -5,7 +5,7 @@
       <v-spacer/>
       <v-btn
         variant="text"
-        @click="$emit('closeDialog')"
+        @click="$emit('close')"
       >
         <v-icon
           size="25"
@@ -59,6 +59,7 @@ export default defineComponent({
       await Handler.getItem(this, fencer, () =>
         FencerService.postFencer(this, this.model)      
       )
+      this.$emit('onFencerCreated')
     }
   }
 })

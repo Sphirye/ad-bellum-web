@@ -33,7 +33,8 @@
     >
       <CreateFencerDialog
         v-if="dialog"
-        @closeDialog="dialog = false"
+        @close="dialog = false;"
+        @on-fencer-created="dialog = false; getFencers()"
       />
     </v-dialog>
   </v-container>
