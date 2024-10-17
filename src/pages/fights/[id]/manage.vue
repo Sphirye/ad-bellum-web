@@ -21,6 +21,7 @@ import MatchService from '@/services/MatchService';
 export default defineComponent({
   data() {
     return {
+      router: useRouter(),
       route: useRoute(),
       match: { item: new Match() } as SingleItem<Match>,
       scores: { items: [] } as MultipleItem<MatchScore>,
@@ -60,6 +61,7 @@ export default defineComponent({
       await Handler.getItem(this, this.match, () =>
         MatchService.updateMatch(this, this.match.item, this.match.item.id!!)
       )
+      this.router.push("/fights/" + this.match.item.id)
     }
   }
 })
