@@ -81,6 +81,9 @@
     </v-card-text>
 
     <v-card-actions>
+      <v-btn variant="outlined" @click="$emit('finalizeMatch')">
+        Finalizar
+      </v-btn>
       <v-spacer/>
       <v-btn variant="outlined" @click="toggleDialog()">
         Punto
@@ -105,6 +108,7 @@
 <script lang="ts">
 import Match from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
+import { emit } from 'process';
 
 
 export default defineComponent({

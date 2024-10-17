@@ -49,4 +49,18 @@ export default class MatchService {
         }
     }
 
+    static async updateMatch(component: ComponentPublicInstance, payload: Match, id: number) {
+        try {
+            const response = await component.axios.put(ConstantTool.BASE_URL + '/match/' + id, payload, {
+                headers: {
+                    Authorization: useAppStore().session.token,
+                }
+            })
+            const match = JsonTool.jsonConvert.deserializeObject(response.data, Match)
+            return Promise.resolve({ result: match })
+        } catch (e) {
+            return Promise.reject(e)
+        }
+    }
+
 }
