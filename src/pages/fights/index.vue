@@ -26,11 +26,25 @@
               single-line
             />
 
-            <v-data-table-virtual
+            <v-data-table
               :items="matches.items"
               :headers="headers"
               hover
-            />
+            >
+
+              <template v-slot:item.fencers="{ item }">
+                <v-chip variant="flat" color="red-darken-3">
+                  {{ item.fencer_1?.name }}
+                </v-chip>
+
+                <span class="px-3">vs</span>
+
+                <v-chip variant="flat" color="grey-darken-3">
+                  {{ item.fencer_2?.name }}
+                </v-chip>
+              </template>
+
+            </v-data-table>
           </template>
         </Card> 
       </v-col>
@@ -53,7 +67,7 @@ import MatchService from '@/services/MatchService';
         matches: { items: [], totalItems: 0 } as MultipleItem<Match>,
 
         headers: [
-          { title: 'Esgrimistas', align: 'center', value: 'fencer_1.name' },
+          { title: 'Esgrimistas', align: 'center', value: 'fencers' },
           { title: 'Duración', align: 'center', value: 'duration' },
           { title: 'Fecha', align: 'center', value: 'date' },
           { title: 'Dobles', align: 'center', value: 'doubles' },
