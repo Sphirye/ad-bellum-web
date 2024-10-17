@@ -4,6 +4,7 @@
       <MarkingComponent
         :match="match.item"
         :scores="scores.items"
+        @finalize-match="finalize()"
       />
     </v-col>
   </v-container>
@@ -12,7 +13,7 @@
 <script lang="ts">
 import Handler from '@/handlers/Handler';
 import { MultipleItem, SingleItem } from '@/handlers/interfaces/ContentUI';
-import Match from '@/models/Match';
+import Match, { MatchState } from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
 import MatchScoreService from '@/services/MatchScoreService';
 import MatchService from '@/services/MatchService';
@@ -51,6 +52,13 @@ export default defineComponent({
 
       await Handler.getItems(this, this.scores, () =>
         MatchScoreService.getScores(this, example)
+      )
+    },
+
+    async finalize() {
+      this.match.item.state = MatchState.FINISHED
+      await Handler.getItem(this, this.match, () =>
+        MatchService.updateMatch(this, this.match.item, this.match.item.id!!)
       )
     }
   }
