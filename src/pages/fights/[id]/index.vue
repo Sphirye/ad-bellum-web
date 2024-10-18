@@ -13,7 +13,7 @@
 
           <template v-slot:text>
             <v-timeline width="300px" side="end" class="mr-auto">
-              <FightScoreTimelineItem v-for="score in scores" :score="score"/>
+              <FightScoreTimelineItem v-for="score in scores.items" :score="score"/>
             </v-timeline>
           </template>
         </Card>
@@ -22,25 +22,47 @@
   </v-container>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import Handler from '@/handlers/Handler';
+import { MultipleItem, SingleItem } from '@/handlers/interfaces/ContentUI';
+import Match from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
+import MatchScoreService from '@/services/MatchScoreService';
+import MatchService from '@/services/MatchService';
 
-
-let scores: MatchScore[] = [
-  {
-    timestamp: "00:14",
-    region: "Cabeza",
+export default defineComponent({
+  data() {
+    return {
+      route: useRoute(),
+      match: { item: new Match() } as SingleItem<Match>,
+      scores: { items: [], totalItems: 0 } as MultipleItem<MatchScore>,
+      loading: false
+    }
+  },
+  
+  created() {
+    this.getMatch()
+    this.getScores()
   },
 
-  {
-    timestamp: "00:28",
-    region: "Cabeza",
-  },
+  methods: {
+    async getMatch() {
+      const id = (this.route.params as any).id
 
-  {
-    timestamp: "00:52",
-    region: "Cabeza",
+      await Handler.getItem(this, this.match, () =>
+        MatchService.getMatch(this, id)
+      )
+    },
+
+    async getScores() {
+      const example = new MatchScore()
+
+      example.id = this.match.item.id
+
+      await Handler.getItems(this, this.scores, () =>
+        MatchScoreService.getScores(this, example)
+      )
+    }
   }
-]
-
+})
 </script>
