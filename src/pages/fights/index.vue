@@ -44,6 +44,15 @@
                 </v-chip>
               </template>
 
+              <template v-slot:item.edit="{ item }">
+                <v-icon
+                  class="me-2"
+                  @click="editItem(item)"
+                >
+                  mdi-information-outline
+                </v-icon>
+              </template>
+
             </v-data-table>
           </template>
         </Card> 
@@ -71,6 +80,7 @@ import MatchService from '@/services/MatchService';
           { title: 'Duración', align: 'center', value: 'duration' },
           { title: 'Fecha', align: 'center', value: 'date' },
           { title: 'Dobles', align: 'center', value: 'doubles' },
+          { title: 'Edición', align: 'center', value: 'edit' },
         ] as any
       }
     },
@@ -84,6 +94,10 @@ import MatchService from '@/services/MatchService';
         await Handler.getItems(this, this.matches, () =>
           MatchService.getMatches(this)
         )
+      },
+
+      editItem(item: any) {
+        this.router.push("/fights/" + item.id)
       }
     }
   })
