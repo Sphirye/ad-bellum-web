@@ -59,7 +59,7 @@ export default defineComponent({
     async getScores() {
       const example = new MatchScore()
 
-      example.id = this.match.item.id
+      example.matchId = (this.route.params as any).id
 
       await Handler.getItems(this, this.scores, () =>
         MatchScoreService.getScores(this, example)
