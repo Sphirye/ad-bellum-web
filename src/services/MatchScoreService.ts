@@ -12,7 +12,7 @@ export default class MatchScoreService {
                 ConstantTool.BASE_URL + '/match-score', 
                 {
                     headers: { Authorization: useAppStore().session.token },
-                    data: example,
+                    params: example,
                 }
             )
             const scores = JsonTool.jsonConvert.deserializeArray(response.data, MatchScore)
