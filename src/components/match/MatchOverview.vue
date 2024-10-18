@@ -58,9 +58,11 @@
 import Match from '@/models/Match';
 
 export default defineComponent({
+  props: {
+    match: { type: Match, required: true },
+  },
   data() {
     return {
-      match: new Match(),
       router: useRouter(),
     }
   }

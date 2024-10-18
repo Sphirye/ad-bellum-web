@@ -14,7 +14,7 @@
             class="text-subtitle-2 text-medium-emphasis d-inline-block text-truncate"
             :style="`max-width: ${vuetify.display.width > 420 ? '200px' : '70px'};`"
           >
-            {{ fencer == 1 ? match.fencer_1 : match.fencer_2 }}
+            {{ fencer == 1 ? match.fencer_1!.name : match.fencer_2!.name }}
           </span>
         </div>
 

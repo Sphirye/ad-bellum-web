@@ -2,7 +2,9 @@
   <v-container fluid>
     <v-row dense>
       <v-col cols="12" sm="7" md="8">
-        <MatchOverview/>
+        <MatchOverview
+          :match="match.item"
+        />
       </v-col>
 
       <v-col cols="12" sm="5" md="4">
