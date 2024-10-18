@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-if="match.item.id">
     <v-row dense>
       <v-col cols="12" sm="7" md="8">
         <MatchOverview
