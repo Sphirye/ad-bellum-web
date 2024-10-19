@@ -21,7 +21,7 @@
         <div class="d-flex flex-column">
           <span>
             <v-icon icon="mdi-check-bold" size="20"/>
-            4
+            {{ getScores().length }}
           </span>
 
           <span>
@@ -98,10 +98,10 @@ export default defineComponent({
       vuetify: vuetify
     }
   },
-  computed: {
+  methods: {
     getScores() {
       return MatchScore.filterByScorer(this.fencer.id!, this.scores)
     }
-  },
+  }
 })
 </script>
