@@ -8,10 +8,18 @@
       <template v-slot:text>
         <div class="d-flex">
           <div>
-            <strong>{{score.verdict}}</strong>
+            <strong>{{score.verdict}} 
+              <template v-if="score.verdict != verdict.DOUBLE">
+                - {{score.scorer?.name}}
+              </template>
+            </strong>
             
             <div class="text-caption">
-              {{score.region}}
+              {{score.type}}
+            </div>
+
+            <div class="text-caption" v-if="score.afterblow">
+              Afterblow
             </div>
 
             <div class="text-caption text-grey" v-if="score.warnings">
@@ -24,13 +32,17 @@
   </v-timeline-item>
 </template>
 
-<script lang="ts" setup>
-import MatchScore from '@/models/MatchScore';
-import { PropType } from 'vue';
-  defineProps({
-    score: {
-      type: Object as PropType<MatchScore>,
-      required: true
-    }
-  })
+<script lang="ts">
+import MatchScore, { Verdict } from '@/models/MatchScore';
+
+export default defineComponent({
+  props: {
+    score: { type: MatchScore, required: true }
+  },
+  computed: {
+    verdict() {
+      return Verdict;
+    },
+  }
+})
 </script>
