@@ -12,20 +12,24 @@
         <v-col cols="6">
           <MatchFencerOverview
             :match="match"          
-            :fencer="1"
+            :fencer="match.fencer_1!"
+            :scores="scores"
             color="rgba(189,69,69,255)"
+            :card-color="1"
           />
         </v-col>
 
         <v-col cols="6">
           <MatchFencerOverview
             :match="match"          
-            :fencer="2"
+            :fencer="match.fencer_2!"
+            :scores="scores"
             color="#494949"
+            :card-color="2"
           />
         </v-col>
 
-        <v-col cols="12">
+        <v-col cols="12" v-if="false">
           <v-card variant="flat" border="opacity-25 sm" max-width="500px">
             <v-card-text>
               <v-card-item class="d-flex py-0">
@@ -56,11 +60,15 @@
 
 <script lang="ts">
 import Match from '@/models/Match';
+import MatchScore from '@/models/MatchScore';
 
 export default defineComponent({
+  props: {
+    match: { type: Match, required: true },
+    scores: { type: Array as PropType<Array<MatchScore>>, required: true },
+  },
   data() {
     return {
-      match: new Match(),
       router: useRouter(),
     }
   }
