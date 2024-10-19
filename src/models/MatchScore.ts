@@ -61,7 +61,7 @@ export default class MatchScore {
   @JsonProperty("matchId", Number, true)
   matchId?: number = undefined
 
-  @JsonProperty("scorer_id", Number, true)
+  @JsonProperty("scorerId", Number, true)
   scorerId?: number = undefined
 
   @JsonProperty("scorer", Fencer, true)
