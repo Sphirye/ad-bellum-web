@@ -21,12 +21,7 @@
         <div class="d-flex flex-column">
           <span>
             <v-icon icon="mdi-check-bold" size="20"/>
-            {{ getScores().length }}
-          </span>
-
-          <span>
-            <v-icon icon="mdi-alert" size="20"/>
-            3
+            {{ getScores().length }} puntos
           </span>
         </div>
         
@@ -34,7 +29,7 @@
     </template>
 
 
-    <v-row no-gutters justify="center" v-if="false">
+    <v-row no-gutters justify="start" v-if="true">
       <v-col cols="12" sm="6">
         <v-card-item class="my-0 py-0 text-center text-sm-start">
           <template v-slot:title>
@@ -43,20 +38,20 @@
           </template>
     
           <v-card-subtitle>
-            Estocadas: 1
+            Estocadas: {{ getScoresByType(pointType.THRUST).length }}
           </v-card-subtitle>
     
           <v-card-subtitle>
-            Cortes: 1
+            Cortes: {{ getScoresByType(pointType.CUT).length }}
           </v-card-subtitle>
     
           <v-card-subtitle>
-            Rebanadas: 1
+            Rebanadas: {{ getScoresByType(pointType.SLICE).length }}
           </v-card-subtitle>
         </v-card-item>
       </v-col>
 
-      <v-col cols="12" sm="6">
+      <v-col cols="12" sm="6" v-if="false">
         <v-card-item class="my-0 pt-0 text-center text-sm-start">
 
           <template v-slot:title>
@@ -81,7 +76,7 @@
 <script lang="ts">
 import Fencer from '@/models/Fencer';
 import Match from '@/models/Match';
-import MatchScore from '@/models/MatchScore';
+import MatchScore, { PointType } from '@/models/MatchScore';
 import vuetify from '@/plugins/vuetify';
 import { PropType } from 'vue';
 
@@ -101,7 +96,17 @@ export default defineComponent({
   methods: {
     getScores() {
       return MatchScore.filterByScorer(this.fencer.id!, this.scores)
-    }
+    },
+
+    getScoresByType(type: PointType) {
+      return this.getScores().filter(score => score.type = type);
+    },
+  },
+
+  computed: {
+    pointType() {
+      return PointType;
+    },
   }
 })
 </script>
