@@ -97,9 +97,8 @@ export default defineComponent({
     getScores() {
       return MatchScore.filterByScorer(this.fencer.id!, this.scores)
     },
-
     getScoresByType(type: PointType) {
-      return this.getScores().filter(score => score.type = type);
+      return this.getScores().filter(score => score.type == type);
     },
   },
 
