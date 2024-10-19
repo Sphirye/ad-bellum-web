@@ -7,14 +7,14 @@
 
         <div class="d-flex flex-column">
           <span class="text-h6 font-weight-bold">
-            {{  fencer == 1 ? 'Rojo' : 'Negro'  }}
+            {{  cardColor == 1 ? 'Rojo' : 'Negro'  }}
           </span>
 
           <span
             class="text-subtitle-2 text-medium-emphasis d-inline-block text-truncate"
             :style="`max-width: ${vuetify.display.width > 420 ? '200px' : '70px'};`"
           >
-            {{ fencer == 1 ? match.fencer_1!.name : match.fencer_2!.name }}
+            {{ fencer.name }}
           </span>
         </div>
 
@@ -79,20 +79,29 @@
 </template>
 
 <script lang="ts">
+import Fencer from '@/models/Fencer';
 import Match from '@/models/Match';
+import MatchScore from '@/models/MatchScore';
 import vuetify from '@/plugins/vuetify';
 import { PropType } from 'vue';
 
 export default defineComponent({
   props: {
     match: { type: Object as PropType<Match>, required: true },
-    fencer: { type: Number, required: true },
-    color: { type: String, required: true }
+    fencer: { type: Fencer, required: true },
+    scores: { type: Array as PropType<Array<MatchScore>>, required: true },
+    color: { type: String, required: true },
+    cardColor: { type: Number, required: true },
   },
   data() {
     return {
       vuetify: vuetify
     }
-  }
+  },
+  computed: {
+    getScores() {
+      return MatchScore.filterByScorer(this.fencer.id!, this.scores)
+    }
+  },
 })
 </script>

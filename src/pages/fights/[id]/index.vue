@@ -4,6 +4,7 @@
       <v-col cols="12" sm="7" md="8">
         <MatchOverview
           :match="match.item"
+          :scores="scores.items"
         />
       </v-col>
 
@@ -42,9 +43,11 @@ export default defineComponent({
     }
   },
   
-  created() {
-    this.getMatch()
-    this.getScores()
+  async created() {
+    await this.getMatch()
+    await this.getScores()
+
+    console.log(this.match.item.fencer_1_id!)
   },
 
   methods: {
