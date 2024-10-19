@@ -66,4 +66,8 @@ export default class MatchScore {
 
   @JsonProperty("scorer", Fencer, true)
   scorer?: Fencer = undefined
+
+  static filterByScorer(scorerId: number, scores: MatchScore[]) {
+    return scores.filter((scorer) => scorer.scorerId == scorerId)
+  }
 }
