@@ -29,7 +29,7 @@
           />
         </v-col>
 
-        <v-col cols="12">
+        <v-col cols="12" v-if="false">
           <v-card variant="flat" border="opacity-25 sm" max-width="500px">
             <v-card-text>
               <v-card-item class="d-flex py-0">
