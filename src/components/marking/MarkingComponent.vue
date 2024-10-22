@@ -108,7 +108,6 @@
 <script lang="ts">
 import Match from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
-import { emit } from 'process';
 
 
 export default defineComponent({
