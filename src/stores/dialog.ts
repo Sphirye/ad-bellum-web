@@ -1,4 +1,3 @@
-import Dialog from "@/models/Dialog";
 import { defineStore } from "pinia";
 
 export const useDialogStore = defineStore('dialog', {
@@ -12,11 +11,17 @@ export const useDialogStore = defineStore('dialog', {
   },
 
   actions: {
-    show(dialog: Dialog) {
+    show(body: string, callback: any) {
       this.enabled = true
-      this.title = dialog.title ? dialog.title : "Atención"
-      this.body = dialog.body!
-      this.callback = dialog.callback
+      this.title = "Atención"
+      this.body = body
+      this.callback = callback
+    },
+
+    async executeCallback() {
+      if (this.callback) {
+        await this.callback()
+      }
     }
   }
 })
