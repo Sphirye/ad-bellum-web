@@ -32,6 +32,10 @@ export default defineComponent({
   async created() {
     await this.getMatch()
 
+    if (this.match.item.state == MatchState.FINISHED) {
+      this.router.push("/fights/" + this.match.item.id)
+    }
+
     if (this.match.item.id) {
       await this.getMatchScores()
     }
