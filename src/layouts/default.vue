@@ -2,6 +2,7 @@
   <v-app>
     <AppHeaderBar v-model="drawer" v-if="appStore.session.token"/>
     <AppNavigationDrawer v-model="drawer" v-if="appStore.session.token"/>
+    <Dialog/>
 
     <v-main>
       <router-view />
