@@ -81,7 +81,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn variant="outlined" @click="$emit('finalizeMatch')">
+      <v-btn variant="outlined" @click="finalize()">
         Finalizar
       </v-btn>
       <v-spacer/>
@@ -106,8 +106,9 @@
 </template>
 
 <script lang="ts">
-import Match from '@/models/Match';
+import Match, { MatchState } from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
+import { useDialogStore } from '@/stores/dialog';
 
 
 export default defineComponent({
@@ -117,12 +118,22 @@ export default defineComponent({
   },
   data() {
     return {
+      dialogStore: useDialogStore(),
       dialog: false,
+      loading: false,
+
     }
   },
   methods: {
     toggleDialog() {
       this.dialog = !this.dialog;
+    },
+
+    async finalize() {
+      this.dialogStore.show("¿Desea finalizar este combate? Los resultados no podrán editarse despues de esta acción.", async () => {
+        this.match.state = MatchState.FINISHED
+        this.$emit('finalizeMatch')
+      })
     }
   }
 })  
