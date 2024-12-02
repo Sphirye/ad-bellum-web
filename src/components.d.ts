@@ -15,6 +15,7 @@ declare module 'vue' {
     Dialog: typeof import('./components/ui/Dialog.vue')['default']
     FightScoreTimelineItem: typeof import('./components/FightScoreTimelineItem.vue')['default']
     MarkingComponent: typeof import('./components/marking/MarkingComponent.vue')['default']
+    MatchesFilterDialog: typeof import('./components/dialogs/MatchesFilterDialog.vue')['default']
     MatchFencerOverview: typeof import('./components/match/MatchFencerOverview.vue')['default']
     MatchOverview: typeof import('./components/match/MatchOverview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
