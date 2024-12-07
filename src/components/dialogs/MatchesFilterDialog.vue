@@ -21,6 +21,7 @@
               hide-details
               single-line
               label="Esgrimista"
+              clearable
             />
 
             <v-chip
@@ -40,6 +41,7 @@
               hide-details
               single-line
               label="Esgrimista"
+              clearable
             />
           </v-col>
 
