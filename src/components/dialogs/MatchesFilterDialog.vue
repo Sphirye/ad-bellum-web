@@ -4,12 +4,13 @@
     fullscreen
     max-width="1024px"
   >
-    <Card>
-      <template v-slot:title>
-        Filtrar matches
-      </template>
-  
-      <template v-slot:text>
+  <Card>
+    <template v-slot:title>
+      Filtrar matches
+    </template>
+
+    <template v-slot:text>
+      <v-form ref="form">
         <v-row no-gutters>
           <v-col cols="12" class="d-flex flex-row align-center">
             <v-autocomplete
@@ -23,7 +24,7 @@
               label="Esgrimista"
               clearable
             />
-
+  
             <v-chip
               variant="flat"
               color="red-darken-3"
@@ -31,7 +32,7 @@
             >
               VS
             </v-chip>
-
+  
             <v-autocomplete
               v-model="matchFilter.fencer_2_id"
               :items="fencers.items"
@@ -41,30 +42,32 @@
               hide-details
               single-line
               label="Esgrimista"
+              :rules="[(matchFilter.fencer_1_id != matchFilter.fencer_2_id)]"
               clearable
             />
           </v-col>
-
+  
           <v-col cols="6">
             <v-col>
               <v-checkbox label="Dobleout"/>
             </v-col>
           </v-col>
         </v-row>
-      </template>
-  
-      <template v-slot:actions>
-        <v-btn>
-          Cancelar
-        </v-btn>
-  
-        <v-spacer/> 
-  
-        <v-btn @click="search()">
-          Buscar
-        </v-btn>
-      </template>
-    </Card>
+      </v-form>
+    </template>
+
+    <template v-slot:actions>
+      <v-btn>
+        Cancelar
+      </v-btn>
+
+      <v-spacer/> 
+
+      <v-btn @click="search()">
+        Buscar
+      </v-btn>
+    </template>
+  </Card>
   </v-dialog>
 </template>
 
@@ -99,9 +102,16 @@ export default {
     },
 
     async search() {
-      this.$emit('search');
-      this.dialog = false;
-    }
+      if (await this._isFormValid()) {
+        this.$emit('search');
+        this.dialog = false;
+      }
+    },
+
+    async _isFormValid() {
+      const { valid } = await (this.$refs['form'] as any).validate()
+      return valid as boolean
+    },
   },
 }
 
