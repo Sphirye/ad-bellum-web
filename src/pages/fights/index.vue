@@ -9,6 +9,15 @@
             <v-spacer/>
 
             <v-btn
+              class="mx-3"
+              color="primary"
+              variant="flat"
+              @click="($refs['dialog'] as any).dialog = true"
+            >
+              Filtrar
+            </v-btn>
+
+            <v-btn
               color="primary"
               variant="flat"
               @click="router.push('/fights/create')"
@@ -58,6 +67,11 @@
         </Card> 
       </v-col>
     </v-row>
+    <MatchesFilterDialog
+      ref="dialog"
+      @search="getMatches()"
+      v-model:match-filter="matchFilter"
+    />
   </v-container>
 </template>
 
@@ -71,6 +85,8 @@ import MatchService from '@/services/MatchService';
     data() {
       return {
         loading: false,
+        dialog: false,
+        matchFilter: new Match(),
         router: useRouter(),
 
         matches: { items: [], totalItems: 0 } as MultipleItem<Match>,
@@ -92,7 +108,7 @@ import MatchService from '@/services/MatchService';
     methods: {
       async getMatches() {
         await Handler.getItems(this, this.matches, () =>
-          MatchService.getMatches(this)
+          MatchService.getMatches(this, this.matchFilter)
         )
       },
 
