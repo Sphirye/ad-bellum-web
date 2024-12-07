@@ -57,7 +57,7 @@
     </template>
 
     <template v-slot:actions>
-      <v-btn>
+      <v-btn @click="dialog = false">
         Cancelar
       </v-btn>
 
