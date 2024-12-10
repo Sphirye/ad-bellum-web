@@ -34,7 +34,7 @@
                   <div class="d-flex justify-space-between">
                     <div class="d-flex flex-column">
                       <span class="text-h6 font-weight-bold">Rojo</span>
-                      <span class="text-subtitle-2 text-medium-emphasis">Carlos</span>
+                      <span class="text-subtitle-2 text-medium-emphasis">{{match.fencer_1?.name}}</span>
                     </div>
                     <v-checkbox
                       v-model="score.scorerId"
@@ -68,7 +68,7 @@
                   <div class="d-flex justify-space-between">
                     <div class="d-flex flex-column">
                       <span class="text-h6 font-weight-bold">Negro</span>
-                      <span class="text-subtitle-2 text-medium-emphasis">Juan</span>
+                      <span class="text-subtitle-2 text-medium-emphasis">{{match.fencer_2?.name}}</span>
                     </div>  
                     <v-checkbox
                       v-model="score.scorerId"
