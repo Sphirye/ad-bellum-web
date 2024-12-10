@@ -20,6 +20,7 @@ declare module 'vue' {
     MatchOverview: typeof import('./components/match/MatchOverview.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScoreHistoryDialog: typeof import('./components/dialogs/ScoreHistoryDialog.vue')['default']
     ScoreMarkingDialog: typeof import('./components/marking/ScoreMarkingDialog.vue')['default']
   }
 }
