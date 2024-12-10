@@ -177,11 +177,24 @@
       </v-card-text>
 
       <v-card-actions>
+        <v-btn
+          icon
+          variant="outlined"
+          :loading="loading"
+          @click="($refs['scoreHistoryDialog'] as any).dialog = true"
+        >
+          <v-icon icon="mdi-clipboard-text"/>
+        </v-btn>
+
+        <v-spacer/>
+
         <v-btn variant="outlined" @click="postScore()" :loading="loading">
           Marcar
         </v-btn>
       </v-card-actions>
     </v-card>
+
+    <ScoreHistoryDialog ref="scoreHistoryDialog"/>
   </v-form>
 </template>
 
