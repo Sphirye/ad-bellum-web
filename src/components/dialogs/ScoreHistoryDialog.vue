@@ -3,7 +3,7 @@
     v-model="dialog"
     fullscreen
   >
-    <v-card>
+    <Card>
       <template v-slot:title>
         Historial de puntos
       </template>
@@ -16,7 +16,7 @@
           />
         </v-timeline>
       </template>
-    </v-card>
+    </Card>
   </v-dialog>
 </template>
 
