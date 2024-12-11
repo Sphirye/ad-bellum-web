@@ -7,9 +7,30 @@
     <v-card variant="flat" class="border-md">
       <template v-slot:text>
         <div class="d-flex">
+          <strong class="me-4">{{score.verdict}} </strong>
+
+          <div v-if="isScorable">
+            <strong>
+              {{score.scorer?.name}}
+            </strong>
+
+            <v-divider class="my-2"/> 
+
+            <div class="text-caption" v-if="score.afterblow">
+              Afterblow
+            </div>
+
+            <div class="text-caption" v-if="score.control">
+              Control
+            </div>
+          </div>
+
+        </div>
+
+        <div class="d-flex" v-if="false">
           <div>
             <strong>{{score.verdict}} 
-              <template v-if="score.verdict != verdict.DOUBLE">
+              <template v-if="isScorable">
                 - {{score.scorer?.name}}
               </template>
             </strong>
@@ -43,6 +64,9 @@ export default defineComponent({
     verdict() {
       return Verdict;
     },
+    isScorable() {
+      return (this.score.verdict != this.verdict.DOUBLE) && (this.score.verdict != this.verdict.NO_EXCHANGE);
+    }
   }
 })
 </script>
