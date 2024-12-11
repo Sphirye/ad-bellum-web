@@ -111,7 +111,10 @@
       />
     </v-dialog>
 
-    <ScoreHistoryDialog ref="scoreHistoryDialog"/>
+    <ScoreHistoryDialog
+      :scores="scores"
+      ref="scoreHistoryDialog"
+    />
   </v-card>
 </template>
 
