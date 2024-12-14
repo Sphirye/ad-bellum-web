@@ -1,7 +1,6 @@
 import DateTimeConverter from "@/services/converters/DateTimeConverter";
 import { JsonObject, JsonProperty } from "json2typescript";
 import { DateTime } from "luxon";
-import User from "./User";
 
 @JsonObject("Auditing")
 export default class Auditing {
