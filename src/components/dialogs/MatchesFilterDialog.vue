@@ -1,8 +1,8 @@
 <template>
   <v-dialog
     v-model="dialog"
-    fullscreen
-    max-width="1024px"
+    :fullscreen="display().mobile.value"
+    :width="display().mobile.value ? '100%' : '650px'"
   >
   <Card>
     <template v-slot:title>
@@ -77,6 +77,7 @@ import { MultipleItem } from '@/handlers/interfaces/ContentUI';
 import Fencer from '@/models/Fencer';
 import Match from '@/models/Match';
 import FencerService from '@/services/FencerService';
+import { useDisplay } from 'vuetify';
 
 export default {
   props: {
@@ -87,6 +88,12 @@ export default {
       loading: false,
       dialog: false,
       fencers: { items: [], totalItems: 0 } as MultipleItem<Fencer>,
+    }
+  },
+
+  computed: {
+    display() {
+      return useDisplay;
     }
   },
 

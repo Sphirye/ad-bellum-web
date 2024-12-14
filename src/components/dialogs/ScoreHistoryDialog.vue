@@ -1,7 +1,8 @@
 <template>
   <v-dialog
     v-model="dialog"
-    fullscreen
+    :fullscreen="display().mobile.value"
+    :width="display().mobile.value ? '100%' : '650px'"
   >
     <Card>
       <template v-slot:title>
@@ -30,6 +31,7 @@
 
 <script lang="ts">
 import MatchScore from '@/models/MatchScore';
+import { useDisplay } from 'vuetify';
 
 
 export default defineComponent({
@@ -40,6 +42,12 @@ export default defineComponent({
     return {
       dialog: false,
       loading: false,
+    }
+  },
+
+  computed: {
+    display() {
+      return useDisplay;
     }
   },
 
