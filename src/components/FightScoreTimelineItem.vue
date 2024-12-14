@@ -54,11 +54,13 @@
 </template>
 
 <script lang="ts">
+import Match from '@/models/Match';
 import MatchScore, { Verdict } from '@/models/MatchScore';
 
 export default defineComponent({
   props: {
-    score: { type: MatchScore, required: true }
+    match: { type: Match, required: true },
+    score: { type: MatchScore, required: true },
   },
   computed: {
     verdict() {
