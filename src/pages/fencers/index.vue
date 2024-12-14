@@ -19,10 +19,14 @@
       </template>
 
       <template v-slot:text>
-        <v-data-table-virtual
+        <v-data-table
           :headers="headers"
           :items="fencers.items"
-        />
+        >
+          <template v-slot:item.createdDate="{ item }">
+            {{ item.createdDate?.toFormat('DD') }}
+          </template>
+        </v-data-table>
       </template>
     </Card>
 

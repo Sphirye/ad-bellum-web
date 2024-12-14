@@ -1,5 +1,6 @@
 import { JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json2typescript"
 import Fencer from "./Fencer"
+import Auditing from "./Auditing"
 
 export enum Verdict {
   DOUBLE = "DOUBLE",
@@ -35,7 +36,7 @@ class PointTypeConverter implements JsonCustomConvert<PointType> {
 }
 
 @JsonObject("MatchScore")
-export default class MatchScore {
+export default class MatchScore extends Auditing {
   @JsonProperty("id", Number)
   id?: number = undefined
 

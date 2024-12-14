@@ -53,6 +53,10 @@
                 </v-chip>
               </template>
 
+              <template v-slot:item.createdDate="{ item }">
+                {{ item.createdDate?.toFormat('DD') }}
+              </template>
+
               <template v-slot:item.edit="{ item }">
                 <v-icon
                   class="me-2"
@@ -95,7 +99,7 @@ import { useDisplay } from 'vuetify';
         headers: [
           { title: 'Esgrimistas', align: 'center', value: 'fencers' },
           { title: 'Duración', align: 'center', value: 'duration' },
-          { title: 'Fecha', align: 'center', value: 'date' },
+          { title: 'Fecha', align: 'center', value: 'createdDate' },
           { title: 'Dobles', align: 'center', value: 'doubles' },
           { title: 'Edición', align: 'center', value: 'edit' },
         ] as any
