@@ -19,7 +19,7 @@
 
 
       <template v-if="$slots.text">
-        <v-card-text>
+        <v-card-text class="overflow-y-auto">
           <slot name="text"/>
         </v-card-text>
 

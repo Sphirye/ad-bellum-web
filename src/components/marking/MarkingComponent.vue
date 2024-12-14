@@ -113,6 +113,7 @@
 
     <ScoreHistoryDialog
       :scores="scores"
+      @refresh-scores="$emit('refreshScores')"
       ref="scoreHistoryDialog"
     />
   </v-card>

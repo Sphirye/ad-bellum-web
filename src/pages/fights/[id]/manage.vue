@@ -4,6 +4,7 @@
       <MarkingComponent
         :match="match.item"
         :scores="scores.items"
+        @refresh-scores="getMatchScores()"
         @finalize-match="finalize()"
       />
     </v-col>
@@ -17,6 +18,7 @@ import Match, { MatchState } from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
 import MatchScoreService from '@/services/MatchScoreService';
 import MatchService from '@/services/MatchService';
+import { useDisplay } from 'vuetify';
 
 export default defineComponent({
   data() {

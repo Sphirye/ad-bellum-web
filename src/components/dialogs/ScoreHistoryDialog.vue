@@ -9,12 +9,20 @@
       </template>
 
       <template v-slot:text>
-        <v-timeline side="end" class="mr-auto">
-          <FightScoreTimelineItem
-            v-for="score in scores"
-            :score="score"
-          />
-        </v-timeline>
+        <div>
+          <div class="text-center">Inicio del combate</div>
+          <v-timeline
+            side="end"
+            class="mr-auto my-8"
+            truncate-line="both"
+          >
+            <FightScoreTimelineItem
+              v-for="score in scores"
+              :score="score"
+            />
+          </v-timeline>
+          <div class="text-center">Fin del combate</div>
+        </div>
       </template>
     </Card>
   </v-dialog>
@@ -32,6 +40,14 @@ export default defineComponent({
     return {
       dialog: false,
       loading: false,
+    }
+  },
+
+  watch: {
+    dialog(newValue: boolean) {
+      if (newValue) {
+        this.$emit('refreshScores')
+      }
     }
   }
 })
