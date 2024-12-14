@@ -1,28 +1,28 @@
 <template>
-  <v-form ref="form">
+  <v-card
+    border="white md"
+    class="mx-auto border-md"
+    color="#242424"
+    fullscreen
+    width="100%"
+    :loading="loading"
+  >
+    <template v-slot:title>
+      <div class="d-flex align-center justify-space-between text-medium-emphasis">
+        Marcar Punto
+        <v-btn
+          @click="$emit('close')"
+          icon="mdi-close"
+          variant="text"
+          density="compact"
+        />
+      </div>
+    </template>
 
-    <v-card
-      border="white md"
-      class="mx-auto border-md"
-      color="#242424"
-      :loading="loading"
-    >
-      <template v-slot:title>
-        <div class="d-flex align-center justify-space-between text-medium-emphasis">
-          Marcar Punto
-          <v-btn
-            @click="$emit('close')"
-            icon="mdi-close"
-            variant="text"
-            density="compact"
-          />
-        </div>
-      </template>
+    <v-divider color="white" thickness="2" class="mx-2"/>
 
-      <v-divider color="white" thickness="2" class="mx-2"/>
-
-      <v-card-text>
-
+    <v-card-text>
+      <v-form ref="form">
         <v-item-group selected-class="border-primary" class="mb-4">
           <v-row dense>
             <v-col cols="6">
@@ -31,22 +31,23 @@
                 :disabled="!isCleanScore()"
               >
                 <template v-slot:title>
-                  <div class="d-flex justify-space-between">
-                    <div class="d-flex flex-column">
+                  <div class="d-flex flex-shrink-0">
+                    <v-checkbox
+                        class="flex-shrink-0"
+                        v-model="score.scorerId"
+                        :value="match.fencer_1_id"
+                        :rules="[isCleanScore() ? rules.required : true]"
+                        return-object
+                        hide-details
+                      /> 
+                    <div class="d-flex flex-column flex-shrink-0">
                       <span class="text-h6 font-weight-bold">Rojo</span>
                       <span class="text-subtitle-2 text-medium-emphasis">{{match.fencer_1?.name}}</span>
                     </div>
-                    <v-checkbox
-                      v-model="score.scorerId"
-                      :value="match.fencer_1_id"
-                      :rules="[isCleanScore() ? rules.required : true]"
-                      return-object
-                      hide-details
-                    />
                   </div>
                 </template>
                 <v-divider color="white" thickness="2" class="mx-1"/>
-    
+  
                 <template v-slot:actions>
                   <v-btn
                     variant="outlined"
@@ -58,29 +59,30 @@
                 </template>
               </v-card>
             </v-col>
-    
+  
             <v-col cols="6">
               <v-card
                 color="#494949"
                 :disabled="!isCleanScore()"
               >
                 <template v-slot:title>
-                  <div class="d-flex justify-space-between">
-                    <div class="d-flex flex-column">
-                      <span class="text-h6 font-weight-bold">Negro</span>
-                      <span class="text-subtitle-2 text-medium-emphasis">{{match.fencer_2?.name}}</span>
-                    </div>  
+                  <div class="d-flex">
                     <v-checkbox
+                      class="flex-shrink-0"
                       v-model="score.scorerId"
                       :value="match.fencer_2_id"
                       :rules="[isCleanScore() ? rules.required : true]"
                       return-object
                       hide-details
                     />
+                    <div class="d-flex flex-column flex-shrink-0">
+                      <span class="text-h6 font-weight-bold">Negro</span>
+                      <span class="text-subtitle-2 text-medium-emphasis">{{match.fencer_2?.name}}</span>
+                    </div>  
                   </div>
                 </template>
                 <v-divider color="white" thickness="2" class="mx-1"/>
-    
+  
                 <template v-slot:actions>
                   <v-btn
                     variant="outlined"
@@ -94,11 +96,11 @@
             </v-col>
           </v-row>
         </v-item-group>
-
-
+  
+  
         <v-row>
           <v-col cols="12">
-
+  
             <v-select
               v-model="score.type"
               :rules="[isCleanScore() ? rules.required : true]"
@@ -114,7 +116,7 @@
               dense
               class="mb-2"
             />
-
+  
             <v-select
               rounded="0"
               label="Flanco"
@@ -124,7 +126,7 @@
               hide-details
               dense
             />
-
+  
             <div class="my-2">
               <v-switch
                 v-model="score.afterblow"
@@ -136,7 +138,7 @@
                 hide-details
                 inset
               />
-    
+  
               <v-switch
                 v-model="score.control"
                 :disabled="!isCleanScore()"
@@ -148,9 +150,9 @@
                 inset
               />
             </div>
-
+  
             <v-divider color="white" thickness="2" class="mx-2"/>
-
+  
             <div class="d-flex justify-space-between wrap">
               <v-switch
                 v-model="score.verdict"
@@ -161,7 +163,7 @@
                 hide-details
                 inset
               />
-    
+  
               <v-switch
                 v-model="score.verdict"
                 :true-value="verdict.NO_EXCHANGE"
@@ -174,17 +176,19 @@
             </div>
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-form>
 
-      <v-card-actions>
-        <v-spacer/>
+    </v-card-text>
 
-        <v-btn variant="outlined" @click="postScore()" :loading="loading">
-          Marcar
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-form>
+    <v-card-actions>
+      <v-spacer/>
+
+      <v-btn variant="outlined" @click="postScore()" :loading="loading">
+        Marcar
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
 </template>
 
 <script lang="ts">
