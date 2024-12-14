@@ -1,7 +1,7 @@
 <template>
   <v-timeline-item :dot-color="scorerColor">
     <template v-slot:opposite>
-      <span>{{score.timestamp}}</span>
+      <span>{{score.createdDate?.hour}}:{{score.createdDate?.minute}}</span>
     </template>
     
     <v-card variant="flat" class="border-md">
