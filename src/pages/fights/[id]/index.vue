@@ -16,7 +16,11 @@
 
           <template v-slot:text>
             <v-timeline width="300px" side="end" class="mr-auto">
-              <FightScoreTimelineItem v-for="score in scores.items" :score="score"/>
+              <FightScoreTimelineItem
+                v-for="score in scores.items"
+                :match="match.item"
+                :score="score"
+              />
             </v-timeline>
           </template>
         </Card>

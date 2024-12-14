@@ -112,6 +112,7 @@
     </v-dialog>
 
     <ScoreHistoryDialog
+      :match="match"
       :scores="scores"
       @refresh-scores="$emit('refreshScores')"
       ref="scoreHistoryDialog"
