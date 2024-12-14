@@ -1,5 +1,5 @@
 <template>
-  <v-timeline-item dot-color="red-darken-3">
+  <v-timeline-item :dot-color="scorerColor">
     <template v-slot:opposite>
       <span>{{score.timestamp}}</span>
     </template>
@@ -68,7 +68,19 @@ export default defineComponent({
     },
     isScorable() {
       return (this.score.verdict != this.verdict.DOUBLE) && (this.score.verdict != this.verdict.NO_EXCHANGE);
+    },
+
+    scorerColor(): string {
+      if (this.score.scorerId == this.match.fencer_1_id) {
+        return "red-darken-3"
+      }
+
+      if (this.score.scorerId == this.match.fencer_2_id) {
+        return "grey-darken-4"
+      }
+
+      return "grey-darken-3"
     }
-  }
+  },
 })
 </script>
