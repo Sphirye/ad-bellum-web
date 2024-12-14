@@ -1,6 +1,7 @@
 import { JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json2typescript"
 import MatchScore from "./MatchScore"
 import Fencer from "./Fencer"
+import Auditing from "./Auditing"
 
 export enum MatchState {
     WAITING = "WAITING",
@@ -19,7 +20,7 @@ class MatchStateConverter implements JsonCustomConvert<MatchState> {
 }
 
 @JsonObject("Match")
-export default class Match {
+export default class Match extends Auditing {
     @JsonProperty("id", Number)
     id?: number = undefined
 
