@@ -80,6 +80,7 @@ import Handler from '@/handlers/Handler';
 import { MultipleItem } from '@/handlers/interfaces/ContentUI';
 import Match from '@/models/Match';
 import MatchService from '@/services/MatchService';
+import { useDisplay } from 'vuetify';
 
   export default defineComponent({
     data() {
@@ -101,6 +102,12 @@ import MatchService from '@/services/MatchService';
       }
     },
 
+    computed: {
+      display() {
+        return useDisplay;
+      }
+    },
+    
     created() {
       this.getMatches()
     },

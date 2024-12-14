@@ -85,6 +85,15 @@
         Finalizar
       </v-btn>
       <v-spacer/>
+
+      <v-btn
+        variant="outlined"
+        :loading="loading"
+        @click="($refs['scoreHistoryDialog'] as any).dialog = true"
+      >
+        Historial
+      </v-btn>
+
       <v-btn variant="outlined" @click="toggleDialog()">
         Punto
       </v-btn>
@@ -102,6 +111,12 @@
       />
     </v-dialog>
 
+    <ScoreHistoryDialog
+      :match="match"
+      :scores="scores"
+      @refresh-scores="$emit('refreshScores')"
+      ref="scoreHistoryDialog"
+    />
   </v-card>
 </template>
 

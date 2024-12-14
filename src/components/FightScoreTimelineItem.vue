@@ -1,5 +1,5 @@
 <template>
-  <v-timeline-item dot-color="red-darken-3">
+  <v-timeline-item :dot-color="scorerColor">
     <template v-slot:opposite>
       <span>{{score.timestamp}}</span>
     </template>
@@ -7,9 +7,30 @@
     <v-card variant="flat" class="border-md">
       <template v-slot:text>
         <div class="d-flex">
+          <strong class="me-4">{{score.verdict}} </strong>
+
+          <div v-if="isScorable">
+            <strong>
+              {{score.scorer?.name}}
+            </strong>
+
+            <v-divider class="my-2"/> 
+
+            <div class="text-caption" v-if="score.afterblow">
+              Afterblow
+            </div>
+
+            <div class="text-caption" v-if="score.control">
+              Control
+            </div>
+          </div>
+
+        </div>
+
+        <div class="d-flex" v-if="false">
           <div>
             <strong>{{score.verdict}} 
-              <template v-if="score.verdict != verdict.DOUBLE">
+              <template v-if="isScorable">
                 - {{score.scorer?.name}}
               </template>
             </strong>
@@ -33,16 +54,33 @@
 </template>
 
 <script lang="ts">
+import Match from '@/models/Match';
 import MatchScore, { Verdict } from '@/models/MatchScore';
 
 export default defineComponent({
   props: {
-    score: { type: MatchScore, required: true }
+    match: { type: Match, required: true },
+    score: { type: MatchScore, required: true },
   },
   computed: {
     verdict() {
       return Verdict;
     },
-  }
+    isScorable() {
+      return (this.score.verdict != this.verdict.DOUBLE) && (this.score.verdict != this.verdict.NO_EXCHANGE);
+    },
+
+    scorerColor(): string {
+      if (this.score.scorerId == this.match.fencer_1_id) {
+        return "red-darken-3"
+      }
+
+      if (this.score.scorerId == this.match.fencer_2_id) {
+        return "grey-darken-4"
+      }
+
+      return "grey-darken-3"
+    }
+  },
 })
 </script>

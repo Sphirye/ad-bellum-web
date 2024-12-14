@@ -177,6 +177,8 @@
       </v-card-text>
 
       <v-card-actions>
+        <v-spacer/>
+
         <v-btn variant="outlined" @click="postScore()" :loading="loading">
           Marcar
         </v-btn>
