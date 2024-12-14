@@ -102,7 +102,8 @@
     <v-dialog
       v-model="dialog"
       persistent
-      width="auto"
+      :fullscreen="display().mobile.value"
+      :width="display().mobile.value ? '100%' : '650px'"
     >
       <ScoreMarkingDialog
         :match="match"
@@ -124,6 +125,7 @@
 import Match, { MatchState } from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
 import { useDialogStore } from '@/stores/dialog';
+import { useDisplay } from 'vuetify';
 
 
 export default defineComponent({
@@ -131,6 +133,13 @@ export default defineComponent({
     match: { type: Match, required: true },
     scores: { type: Array as PropType<Array<MatchScore>>, required: true },
   },
+
+  computed: {
+    display() {
+      return useDisplay;
+    }
+  },
+
   data() {
     return {
       dialogStore: useDialogStore(),
