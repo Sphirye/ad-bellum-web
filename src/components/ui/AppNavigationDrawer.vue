@@ -15,6 +15,11 @@
         title="Esgrimistas"
         @click="router.push('/fencers')"
       />
+
+      <v-list-item
+        title="Usuarios"
+        @click="router.push('/users')"
+      />
     </v-list>
   </v-navigation-drawer>
 </template>
