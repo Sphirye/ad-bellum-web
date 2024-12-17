@@ -35,6 +35,19 @@ export default class MatchScoreService {
         }
     }
 
+    static async updateScore(component: ComponentPublicInstance, payload: MatchScore, id: number) {
+        try {
+            const response = await component.axios.put(ConstantTool.BASE_URL + '/match-score/' + id, payload, {
+                    headers: { Authorization: useAppStore().session.token }
+                }
+            )
+            const score = JsonTool.jsonConvert.deserializeObject(response.data, MatchScore)
+            return Promise.resolve({ result: score })
+        } catch(e) {
+            return Promise.reject(e)
+        }
+    }
+
     static async delete(component: ComponentPublicInstance, id: number): Promise<any> {
         try {
             await component.axios.delete(ConstantTool.BASE_URL + '/match-score/' + id, {
