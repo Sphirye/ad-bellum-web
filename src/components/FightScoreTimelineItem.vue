@@ -14,7 +14,7 @@
         </template>
 
         <v-list class="border-thin rounded-lg">
-          <v-list-item @click="">
+          <v-list-item @click="($refs['dialog'] as any).open()">
             <template v-slot:title>
               <v-icon icon="mdi-pencil" class="mr-2"/>
               Editar Score
@@ -79,6 +79,12 @@
         </div>
       </template>
     </v-card>
+
+    <ScoreEditDialog
+      ref="dialog"
+      :match="match"
+      :score="score"
+    />
   </v-timeline-item>
 </template>
 
