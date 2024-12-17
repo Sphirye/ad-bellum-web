@@ -97,6 +97,85 @@
               </v-card>
             </v-col>
           </v-row>
+
+          <v-row>
+            <v-col cols="12">
+    
+              <v-select
+                v-model="modelScore.type"
+                :rules="[isCleanScore() ? rules.required : true]"
+                :disabled="!isCleanScore()"
+                :items="pointTypes"
+                item-title="name"
+                item-value="value"
+                rounded="0"
+                label="Tipo de punto"
+                variant="outlined"
+                density="comfortable"
+                hide-details
+                dense
+                class="mb-2"
+              />
+    
+              <v-select
+                rounded="0"
+                label="Flanco"
+                variant="outlined"
+                density="comfortable"
+                :items="flanks"
+                hide-details
+                dense
+              />
+    
+              <div class="my-2">
+                <v-switch
+                  v-model="modelScore.afterblow"
+                  :disabled="!isCleanScore()"
+                  @change="onAfterblowChanged()"
+                  density="compact"
+                  color="primary"
+                  label="Afterblow"
+                  hide-details
+                  inset
+                />
+    
+                <v-switch
+                  v-model="modelScore.control"
+                  :disabled="!isCleanScore()"
+                  @change="onControlChanged()"
+                  density="compact"
+                  color="primary"
+                  label="Control"
+                  hide-details
+                  inset
+                />
+              </div>
+    
+              <v-divider color="white" thickness="2" class="mx-2"/>
+    
+              <div class="d-flex justify-space-between wrap">
+                <v-switch
+                  v-model="modelScore.verdict"
+                  :value="verdict.DOUBLE"
+                  :false-value="verdict.POINT"
+                  color="primary"
+                  label="Doble"
+                  hide-details
+                  inset
+                />
+    
+                <v-switch
+                  v-model="modelScore.verdict"
+                  :true-value="verdict.NO_EXCHANGE"
+                  :false-value="verdict.POINT"
+                  color="primary"
+                  label="No exchange"
+                  hide-details
+                  inset
+                />
+              </div>
+            </v-col>
+          </v-row>
         </v-item-group>
       </v-form>
     </template>
@@ -114,7 +193,7 @@
 <script lang="ts">
 import Handler from '@/handlers/Handler';
 import Match from '@/models/Match';
-import MatchScore, { Verdict } from '@/models/MatchScore';
+import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
 import MatchScoreService from '@/services/MatchScoreService';
 import Rules from '@/services/tools/Rules';
 import { useDisplay } from 'vuetify';
@@ -133,6 +212,10 @@ export default defineComponent({
     rules() {
       return Rules
     },
+
+    verdict() {
+      return Verdict
+    }
   },
 
   data() {
@@ -140,6 +223,18 @@ export default defineComponent({
       modelScore: new MatchScore(),
       dialog: false,
       loading: false,
+
+      flanks: [
+        "Cabeza/Superior",
+        "Inferior",
+        "Brazos",
+      ],
+
+      pointTypes: [
+        { name: "Corte", value: PointType.CUT },
+        { name: "Estocada", value: PointType.THRUST },
+        { name: "Rebanada", value: PointType.SLICE },
+      ],
     }
   },
 
@@ -151,6 +246,18 @@ export default defineComponent({
 
     isCleanScore() {
       return this.score.verdict == Verdict.POINT;
+    },
+
+    onAfterblowChanged() {
+      if (this.score.afterblow) {
+        this.score.control = false
+      }
+    },
+
+    onControlChanged() {
+      if (this.score.control) {
+        this.score.afterblow = false
+      }
     },
 
     async updateScore() {
