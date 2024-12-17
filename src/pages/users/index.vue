@@ -1,8 +1,18 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <Card>
       <template v-slot:title>
         Usuarios
+
+        <v-spacer/>
+
+        <v-btn
+          color="primary"
+          variant="flat"
+          @click="($refs['dialog'] as any).dialog = true"
+        >
+          Añadir
+        </v-btn>
       </template>
 
       <template v-slot:text>
@@ -17,6 +27,10 @@
         </v-data-table>
       </template>
     </Card>
+    <CreateUserDialog
+      ref="dialog"
+      @on-user-created="getUsers()"
+    />
   </v-container>
 </template>
 
@@ -36,6 +50,7 @@ export default defineComponent({
       ] as any,
       users: { items: [], totalItems: 0 } as MultipleItem<User>,
       loading: false,
+      dialog: false,
     }
   },
 
@@ -48,6 +63,7 @@ export default defineComponent({
       await Handler.getItems(this, this.users, () =>
         UserService.getUsers(this)  
       )
+      console.log(this.$refs)
     },
   },
 })
