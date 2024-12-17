@@ -84,6 +84,7 @@
       ref="dialog"
       :match="match"
       :score="score"
+      @on-updated-score="$emit('onUpdatedScore')"
     />
   </v-timeline-item>
 </template>

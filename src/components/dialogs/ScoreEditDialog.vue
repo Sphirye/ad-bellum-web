@@ -266,6 +266,7 @@ export default defineComponent({
         MatchScoreService.updateScore(this, this.modelScore, this.score.id!)
       )
       this.dialog = false
+      this.$emit('onUpdatedScore')
     }
   }
 })
