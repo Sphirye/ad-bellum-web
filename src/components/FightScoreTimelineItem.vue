@@ -1,6 +1,35 @@
 <template>
   <v-timeline-item :dot-color="scorerColor">
     <template v-slot:opposite>
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            class="mx-2"
+            variant="plain"
+            v-bind="props"
+            icon
+          >
+            <v-icon color="grey" icon="mdi-dots-horizontal"/>
+          </v-btn>
+        </template>
+
+        <v-list class="border-thin rounded-lg">
+          <v-list-item @click="($refs['dialog'] as any).open()">
+            <template v-slot:title>
+              <v-icon icon="mdi-pencil" class="mr-2"/>
+              Editar Score
+            </template>
+          </v-list-item>
+
+          <v-list-item @click="deleteScore()">
+            <template v-slot:title>
+              <v-icon icon="mdi-trash-can" class="mr-2"/>
+              Eliminar Score
+            </template>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
       <span>{{score.createdDate?.hour}}:{{score.createdDate?.minute}}</span>
     </template>
     
@@ -50,18 +79,27 @@
         </div>
       </template>
     </v-card>
+
+    <ScoreEditDialog
+      ref="dialog"
+      :match="match"
+      :score="score"
+      @on-updated-score="$emit('onUpdatedScore')"
+    />
   </v-timeline-item>
 </template>
 
 <script lang="ts">
 import Match from '@/models/Match';
 import MatchScore, { Verdict } from '@/models/MatchScore';
+import MatchScoreService from '@/services/MatchScoreService';
 
 export default defineComponent({
   props: {
     match: { type: Match, required: true },
     score: { type: MatchScore, required: true },
   },
+
   computed: {
     verdict() {
       return Verdict;
@@ -81,6 +119,13 @@ export default defineComponent({
 
       return "grey-darken-3"
     }
+  },
+
+  methods: {
+    async deleteScore() {
+      await MatchScoreService.delete(this, this.score.id!)
+      this.$emit('onDeletedScore')
+    },
   },
 })
 </script>

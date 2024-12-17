@@ -32,6 +32,8 @@
               v-for="score in scores"
               :match="match"
               :score="score"
+              @on-deleted-score="$emit('refreshScores')"
+              @on-updated-score="$emit('refreshScores')"
             />
           </v-timeline>
           <div class="text-center">Fin del combate</div>
