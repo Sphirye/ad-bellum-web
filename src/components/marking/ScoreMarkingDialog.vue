@@ -28,7 +28,7 @@
             <v-col cols="6">
               <v-card
                 color="rgba(189,69,69,255)"
-                :disabled="!isCleanScore()"
+                :disabled="!isCleanScore"
               >
                 <template v-slot:title>
                   <div class="d-flex flex-shrink-0">
@@ -36,7 +36,7 @@
                         class="flex-shrink-0"
                         v-model="score.scorerId"
                         :value="match.fencer_1_id"
-                        :rules="[isCleanScore() ? rules.required : true]"
+                        :rules="[isCleanScore ? rules.required : true]"
                         return-object
                         hide-details
                       /> 
@@ -63,7 +63,7 @@
             <v-col cols="6">
               <v-card
                 color="#494949"
-                :disabled="!isCleanScore()"
+                :disabled="!isCleanScore"
               >
                 <template v-slot:title>
                   <div class="d-flex">
@@ -71,7 +71,7 @@
                       class="flex-shrink-0"
                       v-model="score.scorerId"
                       :value="match.fencer_2_id"
-                      :rules="[isCleanScore() ? rules.required : true]"
+                      :rules="[isCleanScore ? rules.required : true]"
                       return-object
                       hide-details
                     />
@@ -103,8 +103,8 @@
   
             <v-select
               v-model="score.type"
-              :rules="[isCleanScore() ? rules.required : true]"
-              :disabled="!isCleanScore()"
+              :rules="[isCleanScore ? rules.required : true]"
+              :disabled="!isCleanScore"
               :items="pointTypes"
               item-title="name"
               item-value="value"
@@ -130,7 +130,7 @@
             <div class="my-2">
               <v-switch
                 v-model="score.afterblow"
-                :disabled="!isCleanScore()"
+                :disabled="!isCleanScore"
                 @change="onAfterblowChanged()"
                 density="compact"
                 color="primary"
@@ -141,7 +141,7 @@
   
               <v-switch
                 v-model="score.control"
-                :disabled="!isCleanScore()"
+                :disabled="!isCleanScore"
                 @change="onControlChanged()"
                 density="compact"
                 color="primary"
@@ -226,6 +226,12 @@ export default defineComponent({
     this.resetScore()
   },
 
+  computed: {
+    isCleanScore() {
+      return this.score.verdict == Verdict.POINT;
+    },
+  },
+  
   methods: {
     async postScore() {
       if (await this._isFormValid()) {
@@ -246,10 +252,6 @@ export default defineComponent({
       this.score.verdict = Verdict.POINT
     },
 
-    isCleanScore() {
-      return this.score.verdict == Verdict.POINT;
-    },
-
     onAfterblowChanged() {
       if (this.score.afterblow) {
         this.score.control = false
@@ -267,6 +269,14 @@ export default defineComponent({
         return valid as boolean
       },
   },
+
+  watch: {
+    isCleanScore(newValue: boolean) {
+      if (!newValue) {
+        this.score.scorerId = undefined
+      }
+    }
+  }
 })
 </script>
 
