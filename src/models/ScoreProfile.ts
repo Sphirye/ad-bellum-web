@@ -16,6 +16,9 @@ export default class ScoreProfile extends Auditing {
     @JsonProperty("slices", Number, true)
     slices?: number = undefined
 
+    @JsonProperty("thrusts", Number, true)
+    thrusts?: number = undefined
+
     @JsonProperty("controls", Number, true)
     controls?: number = undefined
 
