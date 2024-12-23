@@ -1,7 +1,11 @@
 <template>
 	<v-container>
-		<v-row justify="center">
-			<v-col cols="12">
+		<Card>
+			<template v-slot:title>
+				Historial de Perfiles
+			</template>
+
+			<template v-slot:text>
 				<v-data-table
 					:headers="state.headers"
 					:items="state.scoreProfiles.items"
@@ -23,10 +27,9 @@
 						mdi-information-outline
 					</v-icon>
 				</template>
-
 				</v-data-table>
-			</v-col>
-		</v-row>
+			</template>
+		</Card>
 	</v-container>
 </template>
 
