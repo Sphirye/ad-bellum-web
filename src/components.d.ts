@@ -25,5 +25,6 @@ declare module 'vue' {
     ScoreEditDialog: typeof import('./components/dialogs/ScoreEditDialog.vue')['default']
     ScoreHistoryDialog: typeof import('./components/dialogs/ScoreHistoryDialog.vue')['default']
     ScoreMarkingDialog: typeof import('./components/marking/ScoreMarkingDialog.vue')['default']
+    ScoreProfileDetails: typeof import('./components/ScoreProfileDetails.vue')['default']
   }
 }
