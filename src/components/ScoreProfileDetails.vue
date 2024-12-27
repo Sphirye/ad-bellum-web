@@ -24,7 +24,7 @@
         </div>
       </v-col>
 
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <v-number-input
           v-model="props.model!.cuts"
           control-variant="split"
@@ -57,7 +57,7 @@
         />
       </v-col>
 
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <v-number-input
           v-model="props.model!.timeLimitInSeconds"
           variant="outlined"

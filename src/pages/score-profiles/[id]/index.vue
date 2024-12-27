@@ -2,7 +2,12 @@
   <v-container>
       <Card v-if="state.scoreProfile.item.id">
         <template v-slot:title>
-          Perfil - {{ state.scoreProfile.item.name }}
+          <v-btn variant="text" icon @click="router.back()" class="mr-2" density="compact">
+            <v-icon icon="mdi-arrow-left"/>
+          </v-btn>
+          <p class="text-truncate">
+            Perfil
+          </p>
         </template>
 
         <template v-slot:text>
