@@ -24,6 +24,9 @@ export default class ScoreProfile extends Auditing {
 
     @JsonProperty("dobleoutLimit", Number, true)
     dobleoutLimit?: number = undefined
+    
+    @JsonProperty("pointsLimit", Number, true)
+    pointsLimit?: number = undefined
 
     @JsonProperty("timeLimitInSeconds", Number, true)
     timeLimitInSeconds?: number = undefined
