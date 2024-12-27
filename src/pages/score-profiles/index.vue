@@ -3,6 +3,17 @@
 		<Card>
 			<template v-slot:title>
 				Historial de Perfiles
+
+        <v-spacer/>
+
+        <v-btn
+          class="mx-3"
+          color="primary"
+          variant="flat"
+          @click="($refs['dialog'] as any).open()"
+        >
+          Crear
+        </v-btn>
 			</template>
 
 			<template v-slot:text>
@@ -30,6 +41,10 @@
 				</v-data-table>
 			</template>
 		</Card>
+
+    <CreateProfileDialog
+      ref="dialog"
+    />
 	</v-container>
 </template>
 
