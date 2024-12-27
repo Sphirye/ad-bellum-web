@@ -12,6 +12,7 @@ declare module 'vue' {
     AppNavigationDrawer: typeof import('./components/ui/AppNavigationDrawer.vue')['default']
     Card: typeof import('./components/ui/Card.vue')['default']
     CreateFencerDialog: typeof import('./components/dialogs/CreateFencerDialog.vue')['default']
+    CreateProfileDialog: typeof import('./components/dialogs/CreateProfileDialog.vue')['default']
     CreateUserDialog: typeof import('./components/dialogs/CreateUserDialog.vue')['default']
     Dialog: typeof import('./components/ui/Dialog.vue')['default']
     FightScoreTimelineItem: typeof import('./components/FightScoreTimelineItem.vue')['default']
@@ -24,5 +25,6 @@ declare module 'vue' {
     ScoreEditDialog: typeof import('./components/dialogs/ScoreEditDialog.vue')['default']
     ScoreHistoryDialog: typeof import('./components/dialogs/ScoreHistoryDialog.vue')['default']
     ScoreMarkingDialog: typeof import('./components/marking/ScoreMarkingDialog.vue')['default']
+    ScoreProfileDetails: typeof import('./components/ScoreProfileDetails.vue')['default']
   }
 }

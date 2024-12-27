@@ -20,6 +20,11 @@
         title="Usuarios"
         @click="router.push('/users')"
       />
+
+      <v-list-item
+        title="Perfiles"
+        @click="router.push('/score-profiles')"
+      />
     </v-list>
   </v-navigation-drawer>
 </template>
