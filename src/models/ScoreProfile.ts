@@ -1,5 +1,20 @@
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json2typescript";
 import Auditing from "./Auditing";
+
+export enum ScoreProfileType {
+    TEMPLATE = "TEMPLATE",
+    INSTANCE = "INSTANCE",
+}
+
+@JsonConverter
+class ScoreProfileTypeConverter implements JsonCustomConvert<ScoreProfile> {
+    deserialize(data: string): ScoreProfile {
+        return (<any>ScoreProfile)[data]
+    }
+    serialize(data: ScoreProfile): any {
+        return data.toString()
+    }
+}
 
 @JsonObject("ScoreProfile")
 export default class ScoreProfile extends Auditing {
@@ -30,4 +45,7 @@ export default class ScoreProfile extends Auditing {
 
     @JsonProperty("timeLimitInSeconds", Number, true)
     timeLimitInSeconds?: number = undefined
+
+    @JsonProperty("type", ScoreProfileTypeConverter, true)
+    type?: ScoreProfileType = undefined
 }
