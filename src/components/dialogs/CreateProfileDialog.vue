@@ -140,7 +140,7 @@
 
 <script lang="ts" setup>
 import Handler from '@/handlers/Handler';
-import ScoreProfile from '@/models/ScoreProfile';
+import ScoreProfile, { ScoreProfileType } from '@/models/ScoreProfile';
 import ScoreProfileService from '@/services/ScoreProfileService';
 import Rules from '@/services/tools/Rules';
 import { useDisplay } from 'vuetify';
@@ -164,6 +164,7 @@ function open() {
 
 async function createScoreProfile() {
   if ((await form.value?.validate())?.valid) {
+    state.model.type = ScoreProfileType.TEMPLATE
     await Handler.sampleRequest(state, () => ScoreProfileService.postScoreProfile(state.model))
     emit('onProfileCreated')
   }
