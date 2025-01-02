@@ -21,15 +21,17 @@ export default class ScoreProfileService {
         }
     }
 
-    static async getScoreProfiles(example?: ScoreProfile): Promise<Response<ScoreProfile[]>> {
+    static async getScoreProfiles(profileScore?: ScoreProfile): Promise<Response<ScoreProfile[]>> {
         try {
             const response = await axios.get(ConstantTool.BASE_URL + "/score-profile", {
+                params: profileScore,
                 headers: {
                     Authorization: useAppStore().session.token,
                 }
             })
-            const scoreProfiles = JsonTool.jsonConvert.deserializeArray(response.data, ScoreProfile)
-            return Promise.resolve({ result: scoreProfiles })
+            const result = JsonTool.jsonConvert.deserializeArray(response.data, ScoreProfile)
+            const xTotalCount = Number(response.headers["x-total-count"])
+            return Promise.resolve({ result, xTotalCount })
         } catch(e) {
             return Promise.reject(e)
         }
