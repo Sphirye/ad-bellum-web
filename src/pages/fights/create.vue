@@ -42,62 +42,19 @@
       </v-col>
 
       <v-col cols="12">
-        <v-slider
-          :step="0.5"
-          :ticks="seasons"
-          min="0"
-          max="4"
-          show-ticks="always"
-          thumb-label="always"
-          variant="outlined"
-          density="comfortable"
-          hide-details
-        />
-
-        <v-spacer/>
-      </v-col>
-
-      <div style="width: 100%">
-        <v-divider opacity="25" class="my-4"/>
-        <div class="my-2 mx-3">Puntos:</div>
-      </div>
-      
-      <v-col cols="4">
-        <v-text-field
+        <v-autocomplete
+          v-model="match.scoreProfile"
+          :items="scoreProfiles.items"
+          return-object
+          item-title="name"
+          @update:model-value="handleScoreProfileChange"
           rounded="0"
+          label="Perfil de Puntos"
           variant="outlined"
           density="comfortable"
           hide-details
           dense
-          label="Cortes"
-          hint="Cantidad de puntos"
-          type="input"
-        />
-      </v-col>
-
-      <v-col cols="4">
-        <v-text-field
-          rounded="0"
-          variant="outlined"
-          density="comfortable"
-          hide-details
-          dense
-          label="Rebanadas"
-          hint="Cantidad de puntos"
-          type="input"
-        />
-      </v-col>
-
-      <v-col cols="4">
-        <v-text-field
-          rounded="0"
-          variant="outlined"
-          density="comfortable"
-          hide-details
-          dense
-          label="Estocadas"
-          hint="Cantidad de puntos"
-          type="input"
+          clearable
         />
       </v-col>
     </v-row>
@@ -106,6 +63,14 @@
       opacity="25"
       class="my-3"
     />
+
+    <template v-if="match.scoreProfile?.id">      
+      <ScoreProfileDetails
+        :model="match.scoreProfile"
+        :editable="true"
+        hide-name
+      />
+    </template>
 
     <v-row dense>
 
@@ -127,18 +92,24 @@ import Handler from '@/handlers/Handler';
 import { MultipleItem, SingleItem } from '@/handlers/interfaces/ContentUI';
 import Fencer from '@/models/Fencer';
 import Match from '@/models/Match';
+import ScoreProfile, { ScoreProfileType } from '@/models/ScoreProfile';
 import FencerService from '@/services/FencerService';
 import MatchService from '@/services/MatchService';
+import ScoreProfileService from '@/services/ScoreProfileService';
 
 export default defineComponent({
   data() {
     return {
       router: useRouter(),
       loading: false,
+      
+      scoreProfileModel: undefined,
 
       match: new Match(),
 
       fencers: { items: [], totalItems: 0 } as MultipleItem<Fencer>,
+
+      scoreProfiles: { items: [], totalItems: 0 } as MultipleItem<ScoreProfile>,
 
       seasons: {
         0: '1 min',
@@ -152,6 +123,7 @@ export default defineComponent({
 
   created() {
     this.getFencers()
+    this.getScoreProfiles()
   },
 
   methods: {
@@ -159,6 +131,12 @@ export default defineComponent({
       await Handler.getItems(this, this.fencers, () =>
         FencerService.getFencers(this)
       )
+    },
+
+    async getScoreProfiles() {
+      const template = new ScoreProfile()
+      template.type = ScoreProfileType.TEMPLATE
+      await Handler.getItems(this, this.scoreProfiles, () => ScoreProfileService.getScoreProfiles(template))
     },
 
     async createMatch() {
@@ -171,7 +149,11 @@ export default defineComponent({
       if (response.item.id) {
         this.router.push("/fights/" + response.item.id + "/manage")
       }
-    }
+    },
+
+    handleScoreProfileChange(scoreProfile: ScoreProfile | null) {
+      console.log(scoreProfile)
+    },
   }
 })
 </script>
