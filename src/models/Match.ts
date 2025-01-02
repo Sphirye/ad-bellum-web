@@ -2,6 +2,7 @@ import { JsonConverter, JsonCustomConvert, JsonObject, JsonProperty } from "json
 import MatchScore from "./MatchScore"
 import Fencer from "./Fencer"
 import Auditing from "./Auditing"
+import ScoreProfile from "./ScoreProfile"
 
 export enum MatchState {
     WAITING = "WAITING",
@@ -42,4 +43,10 @@ export default class Match extends Auditing {
 
     @JsonProperty("state", MatchStateConverter)
     state?: MatchState = undefined
+
+    @JsonProperty("scoreProfile", ScoreProfile, true)
+    scoreProfile?: ScoreProfile = undefined
+
+    @JsonProperty("scoreProfileId", ScoreProfile, true)
+    scoreProfileId?: ScoreProfile = undefined
 }
