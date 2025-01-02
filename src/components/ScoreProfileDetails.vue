@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form">
     <v-row dense>
-      <v-col cols="12" class="me-auto">
+      <v-col cols="12" class="me-auto" v-if="!hideName">
         <v-text-field
           v-model="props.model!.name"
           variant="outlined"
@@ -93,14 +93,7 @@
       </v-col>
 
       <div class="text-subtitle-2 mx-6 text-medium-emphasis" v-if="isEditable">
-        Los campos dejado en blanco serán inferidos a partir del 
-        <a
-          class="text-decoration-none"
-          href="#"
-          @click="router.push('/score-profiles/base')"
-        >
-          perfil base.
-        </a>
+        Los campos editados serán aplicados solo a este combate, el perfil base se mantendrá igual. 
       </div>
     </v-row>
   </v-form>
@@ -110,10 +103,10 @@
 import ScoreProfile from '@/models/ScoreProfile';
 import Rules from '@/services/tools/Rules';
 
-const router = useRouter()
 const props = defineProps({
   model: { type: ScoreProfile, required: true },
-  editable: { type: Boolean, required: false }
+  editable: { type: Boolean, required: false },
+  hideName: { type: Boolean, required: false, default: false }
 })
 
 const rules = Rules
