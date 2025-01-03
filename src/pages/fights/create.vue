@@ -47,30 +47,26 @@
           :items="scoreProfiles.items"
           return-object
           item-title="name"
-          @update:model-value="handleScoreProfileChange"
           rounded="0"
           label="Perfil de Puntos"
           variant="outlined"
           density="comfortable"
           hide-details
           dense
-          clearable
         />
       </v-col>
     </v-row>
 
-    <v-divider
-      opacity="25"
-      class="my-3"
+    <ScoreProfileDetails
+      :model="match.scoreProfile"
+      :editable="true"
+      hide-name
     />
 
-    <template v-if="match.scoreProfile?.id">      
-      <ScoreProfileDetails
-        :model="match.scoreProfile"
-        :editable="true"
-        hide-name
-      />
-    </template>
+    <v-divider
+      opacity="50%"
+      class="my-3"
+    />
 
     <v-row dense>
 
@@ -149,10 +145,6 @@ export default defineComponent({
       if (response.item.id) {
         this.router.push("/fights/" + response.item.id + "/manage")
       }
-    },
-
-    handleScoreProfileChange(scoreProfile: ScoreProfile | null) {
-      console.log(scoreProfile)
     },
   }
 })
