@@ -38,7 +38,7 @@
         <div class="d-flex">
           <strong class="me-4">{{score.verdict}} </strong>
 
-          <div v-if="isScorable">
+          <div v-if="state.isScorable">
             <strong>
               {{score.scorer?.name}}
             </strong>
@@ -59,7 +59,7 @@
         <div class="d-flex" v-if="false">
           <div>
             <strong>{{score.verdict}} 
-              <template v-if="isScorable">
+              <template v-if="state.isScorable">
                 - {{score.scorer?.name}}
               </template>
             </strong>
@@ -84,48 +84,49 @@
       ref="dialog"
       :match="match"
       :score="score"
-      @on-updated-score="$emit('onUpdatedScore')"
+      @on-updated-score="emit('onUpdatedScore')"
     />
   </v-timeline-item>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import Handler from '@/handlers/Handler';
 import Match from '@/models/Match';
 import MatchScore, { Verdict } from '@/models/MatchScore';
 import MatchScoreService from '@/services/MatchScoreService';
 
-export default defineComponent({
-  props: {
-    match: { type: Match, required: true },
-    score: { type: MatchScore, required: true },
-  },
 
-  computed: {
-    verdict() {
-      return Verdict;
-    },
-    isScorable() {
-      return (this.score.verdict != this.verdict.DOUBLE) && (this.score.verdict != this.verdict.NO_EXCHANGE);
-    },
-
-    scorerColor(): string {
-      if (this.score.scorerId == this.match.fencer_1_id) {
-        return "red-darken-3"
-      }
-
-      if (this.score.scorerId == this.match.fencer_2_id) {
-        return "grey-darken-4"
-      }
-
-      return "grey-darken-3"
-    }
-  },
-
-  methods: {
-    async deleteScore() {
-      await MatchScoreService.delete(this, this.score.id!)
-      this.$emit('onDeletedScore')
-    },
-  },
+const props = defineProps({
+  match: { type: Match, required: true },
+  score: { type: MatchScore, required: true },
 })
+
+const emit = defineEmits(['onDeletedScore', 'onUpdatedScore'])
+const scorerColor = computed(() => {
+  if (props.score.scorerId == props.match.fencer_1_id) {
+    return "red-darken-3"
+  }
+
+  if (props.score.scorerId == props.match.fencer_2_id) {
+    return "grey-darken-4"
+  }
+
+  return "grey-darken-3"
+})
+
+const state = reactive({
+  loading: false,
+  isScorable: (props.score.verdict != Verdict.DOUBLE) && (props.score.verdict != Verdict.NO_EXCHANGE),
+  verdicts: [
+    { name: "Punto", value: Verdict.POINT },
+    { name: "Doble", value: Verdict.DOUBLE },
+    { name: "No Exchange", value: Verdict.NO_EXCHANGE },
+    { name: "No Quality", value: Verdict.NO_QUALITY},
+  ],
+})
+
+async function deleteScore() {
+  await Handler.sampleRequest(state, () => MatchScoreService.delete(props.score.id!))
+  emit('onDeletedScore')
+}
 </script>

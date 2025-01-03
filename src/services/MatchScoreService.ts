@@ -49,9 +49,9 @@ export default class MatchScoreService {
         }
     }
 
-    static async delete(component: ComponentPublicInstance, id: number): Promise<any> {
+    static async delete(id: number): Promise<any> {
         try {
-            await component.axios.delete(ConstantTool.BASE_URL + '/match-score/' + id, {
+            await axios.delete(ConstantTool.BASE_URL + '/match-score/' + id, {
                     headers: { Authorization: useAppStore().session.token }
                 }
             )
