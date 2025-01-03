@@ -24,6 +24,7 @@
             density="comfortable"
             hide-details
             dense
+            :rules="[rules.required]"
           />
         </v-col>
   
@@ -39,6 +40,7 @@
             density="comfortable"
             hide-details
             dense
+            :rules="[rules.required]"
           />
         </v-col>
   
@@ -94,6 +96,7 @@ import ScoreProfile, { ScoreProfileType } from '@/models/ScoreProfile';
 import FencerService from '@/services/FencerService';
 import MatchService from '@/services/MatchService';
 import ScoreProfileService from '@/services/ScoreProfileService';
+import Rules from '@/services/tools/Rules';
 
 export default defineComponent({
   data() {
@@ -104,6 +107,7 @@ export default defineComponent({
       match: new Match(),
       fencers: { items: [], totalItems: 0 } as MultipleItem<Fencer>,
       scoreProfiles: { items: [], totalItems: 0 } as MultipleItem<ScoreProfile>,
+      rules: Rules,
     }
   },
 
