@@ -3,6 +3,7 @@ import ConstantTool from "./tools/ConstantTool"
 import MatchScore from "@/models/MatchScore"
 import JsonTool from "./tools/JsonTool"
 import Response from "@/models/responses/Response"
+import axios from "axios"
 
 export default class MatchScoreService {
 
@@ -22,9 +23,9 @@ export default class MatchScoreService {
         }
     }
 
-    static async postScore(component: ComponentPublicInstance, payload: MatchScore) {
+    static async postScore(payload: MatchScore) {
         try {
-            const response = await component.axios.post(ConstantTool.BASE_URL + '/match-score', payload, {
+            const response = await axios.post(ConstantTool.BASE_URL + '/match-score', payload, {
                     headers: { Authorization: useAppStore().session.token }
                 }
             )
@@ -48,9 +49,9 @@ export default class MatchScoreService {
         }
     }
 
-    static async delete(component: ComponentPublicInstance, id: number): Promise<any> {
+    static async delete(id: number): Promise<any> {
         try {
-            await component.axios.delete(ConstantTool.BASE_URL + '/match-score/' + id, {
+            await axios.delete(ConstantTool.BASE_URL + '/match-score/' + id, {
                     headers: { Authorization: useAppStore().session.token }
                 }
             )

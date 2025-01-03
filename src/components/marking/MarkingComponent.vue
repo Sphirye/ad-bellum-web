@@ -29,7 +29,7 @@
                 <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
               </v-card-text>
               
-              <v-card-text>
+              <v-card-text v-if="false">
                 <v-row justify="space-around">
                   <v-icon icon="mdi-alert-box"/>
                   <v-icon icon="mdi-alert-box"/>
@@ -56,7 +56,7 @@
                 <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
               </v-card-text>
 
-              <v-card-text>
+              <v-card-text v-if="false">
                 <v-row justify="space-around">
                   <v-icon icon="mdi-alert-box-outline"/>
                   <v-icon icon="mdi-alert-box-outline"/>
@@ -69,7 +69,7 @@
         </v-row>
     </v-card-text>
 
-    <v-card-text>
+    <v-card-text v-if="false">
       <v-time-picker width="auto" class="only-timer">
         <template v-slot:title>
           <div class="d-flex align-center justify-space-between">
@@ -94,23 +94,16 @@
         Historial
       </v-btn>
 
-      <v-btn variant="outlined" @click="toggleDialog()">
+      <v-btn variant="outlined" @click="($refs['scoreMarkingDialog'] as any).open()">
         Punto
       </v-btn>
     </v-card-actions>
 
-    <v-dialog
-      v-model="dialog"
-      persistent
-      :fullscreen="display().mobile.value"
-      :width="display().mobile.value ? '100%' : '650px'"
-    >
-      <ScoreMarkingDialog
-        :match="match"
-        :scores="scores"
-        @close="dialog = false"
-      />
-    </v-dialog>
+    <ScoreMarkingDialog
+      :match="match"
+      :scores="scores"
+      ref="scoreMarkingDialog"
+    />
 
     <ScoreHistoryDialog
       :match="match"
@@ -118,6 +111,7 @@
       @refresh-scores="$emit('refreshScores')"
       ref="scoreHistoryDialog"
     />
+
   </v-card>
 </template>
 
@@ -143,16 +137,10 @@ export default defineComponent({
   data() {
     return {
       dialogStore: useDialogStore(),
-      dialog: false,
       loading: false,
-
     }
   },
   methods: {
-    toggleDialog() {
-      this.dialog = !this.dialog;
-    },
-
     async finalize() {
       this.dialogStore.show("¿Desea finalizar este combate? Los resultados no podrán editarse despues de esta acción.", async () => {
         this.match.state = MatchState.FINISHED
