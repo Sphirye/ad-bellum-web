@@ -36,7 +36,7 @@
     <v-card variant="flat" class="border-md">
       <template v-slot:text>
         <div class="d-flex">
-          <strong class="me-4">{{ state.verdicts.find((v: any) => v.value == score.verdict).name}} </strong>
+          <strong class="me-4">{{ state.verdicts.find((v: any) => v.value == score.verdict)?.name}} </strong>
 
           <div v-if="state.isScorable">
             <strong>
@@ -46,7 +46,7 @@
             <v-divider class="my-2"/> 
 
             <div>
-              {{ state.pointTypes.find((pt: any) => pt.value == score.type).name }}
+              {{ state.pointTypes.find((pt: any) => pt.value == score.type)?.name }}
             </div>
 
             <div class="text-caption" v-if="score.afterblow">
