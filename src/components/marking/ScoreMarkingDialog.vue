@@ -192,7 +192,6 @@
           Marcar
         </v-btn>
       </v-card-actions>
-      {{ state.score }}
     </v-card>
   </v-dialog>
 
