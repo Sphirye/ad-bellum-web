@@ -3,7 +3,7 @@
     <v-row dense>
       <v-col cols="12" class="me-auto" v-if="!hideName">
         <v-text-field
-          v-model="props.model!.name"
+          v-model="props.model.name"
           variant="outlined"
           label="Nombre"
           hide-details="auto"
@@ -26,7 +26,7 @@
 
       <v-col cols="12" sm="6">
         <v-number-input
-          v-model="props.model!.cuts"
+          v-model="props.model.cuts"
           control-variant="split"
           :min="0"
           variant="outlined"
@@ -36,7 +36,7 @@
         />
 
         <v-number-input
-          v-model="props.model!.slices"
+          v-model="props.model.slices"
           control-variant="split"
           :min="0"
           variant="outlined"
@@ -47,7 +47,7 @@
         />
 
         <v-number-input
-          v-model="props.model!.thrusts"
+          v-model="props.model.thrusts"
           control-variant="split"
           :min="0"
           variant="outlined"
@@ -59,7 +59,7 @@
 
       <v-col cols="12" sm="6">
         <v-number-input
-          v-model="props.model!.timeLimitInSeconds"
+          v-model="props.model.timeLimitInSeconds"
           variant="outlined"
           control-variant="split"
           :min="0"
@@ -71,7 +71,7 @@
         />
 
         <v-number-input
-          v-model="props.model!.controls"
+          v-model="props.model.controls"
           variant="outlined"
           control-variant="split"
           :min="0"
@@ -82,7 +82,7 @@
         />
 
         <v-number-input
-          v-model="props.model!.dobleoutLimit"
+          v-model="props.model.dobleoutLimit"
           control-variant="split"
           :min="0"
           variant="outlined"
@@ -104,7 +104,7 @@ import ScoreProfile from '@/models/ScoreProfile';
 import Rules from '@/services/tools/Rules';
 
 const props = defineProps({
-  model: { type: ScoreProfile, required: true, default: new ScoreProfile() },
+  model: { type: ScoreProfile, required: true },
   editable: { type: Boolean, required: false },
   hideName: { type: Boolean, required: false, default: false }
 })
