@@ -29,7 +29,7 @@
                 <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
               </v-card-text>
               
-              <v-card-text>
+              <v-card-text v-if="false">
                 <v-row justify="space-around">
                   <v-icon icon="mdi-alert-box"/>
                   <v-icon icon="mdi-alert-box"/>
@@ -56,7 +56,7 @@
                 <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
               </v-card-text>
 
-              <v-card-text>
+              <v-card-text v-if="false">
                 <v-row justify="space-around">
                   <v-icon icon="mdi-alert-box-outline"/>
                   <v-icon icon="mdi-alert-box-outline"/>
@@ -118,6 +118,7 @@
       @refresh-scores="$emit('refreshScores')"
       ref="scoreHistoryDialog"
     />
+
   </v-card>
 </template>
 
