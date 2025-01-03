@@ -25,8 +25,9 @@
 
 
               <v-card-text>
-                <v-card-subtitle class="text-white">Dobles: 0</v-card-subtitle>
-                <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
+                <v-card-subtitle class="text-white">Cortes: {{ getScoreByScorerIdAndPointType(match.fencer_1_id!, PointType.CUT).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Rebanadas: {{ getScoreByScorerIdAndPointType(match.fencer_1_id!, PointType.SLICE).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Estocadas: {{ getScoreByScorerIdAndPointType(match.fencer_1_id!, PointType.THRUST).length }}</v-card-subtitle>
               </v-card-text>
               
               <v-card-text v-if="false">
@@ -52,8 +53,9 @@
               <v-divider color="white" thickness="2" class="mx-1"/>
 
               <v-card-text>
-                <v-card-subtitle class="text-white">Dobles: 0</v-card-subtitle>
-                <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
+                <v-card-subtitle class="text-white">Cortes: {{ getScoreByScorerIdAndPointType(match.fencer_2_id!, PointType.CUT).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Rebanadas: {{ getScoreByScorerIdAndPointType(match.fencer_2_id!, PointType.SLICE).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Estocadas: {{ getScoreByScorerIdAndPointType(match.fencer_2_id!, PointType.THRUST).length }}</v-card-subtitle>
               </v-card-text>
 
               <v-card-text v-if="false">
@@ -102,6 +104,7 @@
     <ScoreMarkingDialog
       :match="match"
       :scores="scores"
+      @refresh-scores="emit('refreshScores')"
       ref="scoreMarkingDialog"
     />
 
@@ -111,13 +114,12 @@
       @refresh-scores="emit('refreshScores')"
       ref="scoreHistoryDialog"
     />
-
   </v-card>
 </template>
 
 <script lang="ts" setup>
 import Match, { MatchState } from '@/models/Match';
-import MatchScore from '@/models/MatchScore';
+import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
 import { useDialogStore } from '@/stores/dialog';
 import { useDisplay } from 'vuetify';
 
@@ -137,6 +139,12 @@ async function finalize() {
     props.match.state = MatchState.FINISHED
     emit('finalizeMatch')
   })
+}
+
+function getScoreByScorerIdAndPointType(scorerId: number, type: PointType) {
+  return props.scores.filter(s => 
+    (s.type == type) && (s.verdict = Verdict.POINT) && (s.scorerId == scorerId)
+  )
 }
 
 const emit = defineEmits(['finalizeMatch', 'refreshScores'])
