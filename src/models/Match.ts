@@ -41,12 +41,12 @@ export default class Match extends Auditing {
 
     matchScores?: MatchScore[] = undefined
 
-    @JsonProperty("state", MatchStateConverter)
+    @JsonProperty("state", MatchStateConverter, true)
     state?: MatchState = undefined
 
     @JsonProperty("scoreProfile", ScoreProfile, true)
     scoreProfile?: ScoreProfile = undefined
 
-    @JsonProperty("scoreProfileId", ScoreProfile, true)
+    @JsonProperty("scoreProfileId", Number, true)
     scoreProfileId?: ScoreProfile = undefined
 }
