@@ -43,6 +43,7 @@
 		</Card>
 
     <CreateProfileDialog
+	  @on-profile-created="refresh()"
       ref="dialog"
     />
 	</v-container>
