@@ -104,7 +104,7 @@ import ScoreProfile from '@/models/ScoreProfile';
 import Rules from '@/services/tools/Rules';
 
 const props = defineProps({
-  model: { type: ScoreProfile, required: true },
+  model: { type: ScoreProfile, required: true, default: new ScoreProfile() },
   editable: { type: Boolean, required: false },
   hideName: { type: Boolean, required: false, default: false }
 })
