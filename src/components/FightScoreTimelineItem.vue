@@ -45,6 +45,10 @@
 
             <v-divider class="my-2"/> 
 
+            <div>
+              {{ state.pointTypes.find((pt: any) => pt.value == score.type).name }}
+            </div>
+
             <div class="text-caption" v-if="score.afterblow">
               Afterblow
             </div>
@@ -92,7 +96,7 @@
 <script lang="ts" setup>
 import Handler from '@/handlers/Handler';
 import Match from '@/models/Match';
-import MatchScore, { Verdict } from '@/models/MatchScore';
+import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
 import MatchScoreService from '@/services/MatchScoreService';
 
 
@@ -123,6 +127,11 @@ const state = reactive({
     { name: "No Exchange", value: Verdict.NO_EXCHANGE },
     { name: "No Quality", value: Verdict.NO_QUALITY},
   ],
+  pointTypes: [
+    { name: "Corte", value: PointType.CUT },
+    { name: "Rebanada", value: PointType.SLICE },
+    { name: "Estocada", value: PointType.THRUST },
+  ]
 })
 
 async function deleteScore() {
