@@ -244,6 +244,7 @@ async function postScore() {
     await Handler.sampleRequest(state, () =>
       MatchScoreService.postScore(state.score)
     )
+    emit('refreshScores')
 
     state.dialog = false
   }
@@ -276,6 +277,8 @@ function open() {
 async function isFormValid() {
   return (await form.value?.validate())?.valid
 }
+
+const emit = defineEmits(['refreshScores'])
 
 resetScore()
 </script>

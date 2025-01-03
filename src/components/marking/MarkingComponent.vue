@@ -25,8 +25,9 @@
 
 
               <v-card-text>
-                <v-card-subtitle class="text-white">Dobles: 0</v-card-subtitle>
-                <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
+                <v-card-subtitle class="text-white">Cortes: {{ getScoreByScorerIdAndPointType(match.fencer_1_id!, PointType.CUT).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Rebanadas: {{ getScoreByScorerIdAndPointType(match.fencer_1_id!, PointType.SLICE).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Estocadas: {{ getScoreByScorerIdAndPointType(match.fencer_1_id!, PointType.THRUST).length }}</v-card-subtitle>
               </v-card-text>
               
               <v-card-text v-if="false">
@@ -52,8 +53,9 @@
               <v-divider color="white" thickness="2" class="mx-1"/>
 
               <v-card-text>
-                <v-card-subtitle class="text-white">Dobles: 0</v-card-subtitle>
-                <v-card-subtitle class="text-white">Afters: 0</v-card-subtitle>
+                <v-card-subtitle class="text-white">Cortes: {{ getScoreByScorerIdAndPointType(match.fencer_2_id!, PointType.CUT).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Rebanadas: {{ getScoreByScorerIdAndPointType(match.fencer_2_id!, PointType.SLICE).length }}</v-card-subtitle>
+                <v-card-subtitle class="text-white">Estocadas: {{ getScoreByScorerIdAndPointType(match.fencer_2_id!, PointType.THRUST).length }}</v-card-subtitle>
               </v-card-text>
 
               <v-card-text v-if="false">
@@ -88,7 +90,7 @@
 
       <v-btn
         variant="outlined"
-        :loading="loading"
+        :loading="state.loading"
         @click="($refs['scoreHistoryDialog'] as any).dialog = true"
       >
         Historial
@@ -102,53 +104,51 @@
     <ScoreMarkingDialog
       :match="match"
       :scores="scores"
+      @refresh-scores="emit('refreshScores')"
       ref="scoreMarkingDialog"
     />
 
     <ScoreHistoryDialog
       :match="match"
       :scores="scores"
-      @refresh-scores="$emit('refreshScores')"
+      @refresh-scores="emit('refreshScores')"
       ref="scoreHistoryDialog"
     />
-
   </v-card>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Match, { MatchState } from '@/models/Match';
-import MatchScore from '@/models/MatchScore';
+import MatchScore, { PointType, Verdict } from '@/models/MatchScore';
 import { useDialogStore } from '@/stores/dialog';
 import { useDisplay } from 'vuetify';
 
+const props = defineProps({
+  match: { type: Match, required: true },
+  scores: { type: Array as PropType<Array<MatchScore>>, required: true },
+})
 
-export default defineComponent({
-  props: {
-    match: { type: Match, required: true },
-    scores: { type: Array as PropType<Array<MatchScore>>, required: true },
-  },
+const state = reactive({
+  display: useDisplay(),
+  dialogStore: useDialogStore(),
+  loading: false,
+})
 
-  computed: {
-    display() {
-      return useDisplay;
-    }
-  },
+async function finalize() {
+  state.dialogStore.show("¿Desea finalizar este combate? Los resultados no podrán editarse despues de esta acción.", async () => {
+    props.match.state = MatchState.FINISHED
+    emit('finalizeMatch')
+  })
+}
 
-  data() {
-    return {
-      dialogStore: useDialogStore(),
-      loading: false,
-    }
-  },
-  methods: {
-    async finalize() {
-      this.dialogStore.show("¿Desea finalizar este combate? Los resultados no podrán editarse despues de esta acción.", async () => {
-        this.match.state = MatchState.FINISHED
-        this.$emit('finalizeMatch')
-      })
-    }
-  }
-})  
+function getScoreByScorerIdAndPointType(scorerId: number, type: PointType) {
+  return props.scores.filter(s => 
+    (s.type == type) && (s.verdict = Verdict.POINT) && (s.scorerId == scorerId)
+  )
+}
+
+const emit = defineEmits(['finalizeMatch', 'refreshScores'])
+
 </script>
 
 <style>
