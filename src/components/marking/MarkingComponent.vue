@@ -69,7 +69,7 @@
         </v-row>
     </v-card-text>
 
-    <v-card-text>
+    <v-card-text v-if="false">
       <v-time-picker width="auto" class="only-timer">
         <template v-slot:title>
           <div class="d-flex align-center justify-space-between">
