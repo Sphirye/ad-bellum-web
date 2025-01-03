@@ -61,6 +61,7 @@
       </v-row>
   
       <ScoreProfileDetails
+        v-if="match.scoreProfile"
         :model="match.scoreProfile"
         :editable="true"
         hide-name
@@ -83,6 +84,7 @@
           Crear
         </v-btn>
       </v-row>
+
     </v-form>
   </v-container>
 </template>
