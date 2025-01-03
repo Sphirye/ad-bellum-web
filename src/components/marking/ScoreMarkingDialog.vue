@@ -192,6 +192,7 @@
           Marcar
         </v-btn>
       </v-card-actions>
+      {{ state.score }}
     </v-card>
   </v-dialog>
 
@@ -270,7 +271,6 @@ function onControlChanged() {
 function open() {
   resetScore()
   state.dialog = true
-  state.score = new MatchScore()
 }
 
 async function isFormValid() {
