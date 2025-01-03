@@ -36,7 +36,7 @@
     <v-card variant="flat" class="border-md">
       <template v-slot:text>
         <div class="d-flex">
-          <strong class="me-4">{{score.verdict}} </strong>
+          <strong class="me-4">{{ state.verdicts.find((v: any) => v.value == score.verdict).name}} </strong>
 
           <div v-if="state.isScorable">
             <strong>
