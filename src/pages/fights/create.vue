@@ -100,22 +100,10 @@ export default defineComponent({
     return {
       router: useRouter(),
       loading: false,
-      
       scoreProfileModel: undefined,
-
       match: new Match(),
-
       fencers: { items: [], totalItems: 0 } as MultipleItem<Fencer>,
-
       scoreProfiles: { items: [], totalItems: 0 } as MultipleItem<ScoreProfile>,
-
-      seasons: {
-        0: '1 min',
-        1: '2 min',
-        2: '3 min',
-        3: '4 min',
-        4: '5 min',
-      }
     }
   },
 
