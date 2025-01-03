@@ -88,7 +88,7 @@
 
       <v-btn
         variant="outlined"
-        :loading="loading"
+        :loading="state.loading"
         @click="($refs['scoreHistoryDialog'] as any).dialog = true"
       >
         Historial
@@ -108,47 +108,39 @@
     <ScoreHistoryDialog
       :match="match"
       :scores="scores"
-      @refresh-scores="$emit('refreshScores')"
+      @refresh-scores="emit('refreshScores')"
       ref="scoreHistoryDialog"
     />
 
   </v-card>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Match, { MatchState } from '@/models/Match';
 import MatchScore from '@/models/MatchScore';
 import { useDialogStore } from '@/stores/dialog';
 import { useDisplay } from 'vuetify';
 
+const props = defineProps({
+  match: { type: Match, required: true },
+  scores: { type: Array as PropType<Array<MatchScore>>, required: true },
+})
 
-export default defineComponent({
-  props: {
-    match: { type: Match, required: true },
-    scores: { type: Array as PropType<Array<MatchScore>>, required: true },
-  },
+const state = reactive({
+  display: useDisplay(),
+  dialogStore: useDialogStore(),
+  loading: false,
+})
 
-  computed: {
-    display() {
-      return useDisplay;
-    }
-  },
+async function finalize() {
+  state.dialogStore.show("¿Desea finalizar este combate? Los resultados no podrán editarse despues de esta acción.", async () => {
+    props.match.state = MatchState.FINISHED
+    emit('finalizeMatch')
+  })
+}
 
-  data() {
-    return {
-      dialogStore: useDialogStore(),
-      loading: false,
-    }
-  },
-  methods: {
-    async finalize() {
-      this.dialogStore.show("¿Desea finalizar este combate? Los resultados no podrán editarse despues de esta acción.", async () => {
-        this.match.state = MatchState.FINISHED
-        this.$emit('finalizeMatch')
-      })
-    }
-  }
-})  
+const emit = defineEmits(['finalizeMatch', 'refreshScores'])
+
 </script>
 
 <style>
