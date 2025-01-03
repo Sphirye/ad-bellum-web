@@ -166,6 +166,7 @@ async function createScoreProfile() {
   if ((await form.value?.validate())?.valid) {
     state.model.type = ScoreProfileType.TEMPLATE
     await Handler.sampleRequest(state, () => ScoreProfileService.postScoreProfile(state.model))
+    state.dialog = false
     emit('onProfileCreated')
   }
 }
